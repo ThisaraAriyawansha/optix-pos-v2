@@ -480,7 +480,7 @@
                 <p class="login-subtitle">Sign in to access your account</p>
             </div>
 
-            <form class="login-form" action="{{ asset('login') }}" method="POST" id="loginForm">
+            <form class="login-form" action="{{ route('login.post') }}" method="POST" id="loginForm">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="form-label" for="email">
@@ -521,6 +521,12 @@
                         </button>
                     </div>
                 </div>
+
+                @if ($errors->any())
+                    <div style="background:#fff0f0;border:1px solid #ffb3b3;color:#cc0000;padding:12px 16px;border-radius:10px;margin-bottom:1.2rem;font-size:14px;">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
 
                 <button type="submit" class="login-button" id="submitBtn">
                     Sign In
