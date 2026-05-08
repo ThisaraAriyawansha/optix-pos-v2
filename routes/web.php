@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Login Page
+Route::get('/', [LoginController::class, 'login'])->name('login');
