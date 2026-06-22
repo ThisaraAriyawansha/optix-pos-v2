@@ -35,7 +35,10 @@
                     </svg>
                 </button>
                 {{-- logout --}}
-                <button class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 active:bg-white/20 transition-colors">
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
+                <button type="button" onclick="openLogoutModal()" class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 active:bg-white/20 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
@@ -45,6 +48,33 @@
         </div>
 
     </header>
+
+    {{-- ────────────────────────── LOGOUT CONFIRM MODAL ────────────────────────── --}}
+    <div id="logoutModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center px-6">
+        <div onclick="closeLogoutModal()" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+        <div class="relative w-full max-w-xs bg-surface rounded-2xl shadow-xl border border-subtle p-5 text-center">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-surface-alt flex items-center justify-center">
+                <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+            </div>
+            <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-base">Log out of OptiX POS?</h2>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1 font-sans">You'll need to sign in again to continue.</p>
+
+            <div class="flex gap-2 mt-5">
+                <button type="button" onclick="closeLogoutModal()"
+                        class="flex-1 py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">
+                    Cancel
+                </button>
+                <button type="button" onclick="document.getElementById('logoutForm').submit()"
+                        class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-brand text-white active:scale-95 transition-transform">
+                    Log out
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         function updateLiveClock() {
@@ -64,4 +94,11 @@
         }
         updateLiveClock();
         setInterval(updateLiveClock, 1000);
+
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        }
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.add('hidden');
+        }
     </script>
