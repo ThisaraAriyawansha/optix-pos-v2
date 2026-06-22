@@ -18,7 +18,7 @@
     </script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
-<body class="font-sans bg-gray-50 dark:bg-gray-950 min-h-screen relative overflow-x-hidden transition-colors duration-200">
+<body class="font-sans bg-page min-h-screen relative overflow-x-hidden transition-colors duration-200">
 
     @include('frontend.componenet.header')
 
