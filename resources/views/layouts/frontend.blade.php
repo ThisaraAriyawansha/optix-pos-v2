@@ -6,16 +6,32 @@
     <title>OptiX - Home</title>
     <link rel="shortcut icon" href="{{ asset('assets/img/pageImg/5646546523465 - Copy.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        // Apply saved theme before paint to avoid a light/dark flash.
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
-<body class="font-sans bg-gray-50 min-h-screen relative overflow-x-hidden">
+<body class="font-sans bg-gray-50 dark:bg-gray-950 min-h-screen relative overflow-x-hidden transition-colors duration-200">
 
     @include('frontend.componenet.header')
 
     @yield('content')
 
     @include('frontend.componenet.buttomnav')
+
+    <script>
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+    </script>
 
 </body>
 </html>
