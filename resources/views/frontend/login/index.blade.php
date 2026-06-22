@@ -8,6 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+        :root {
+            --color-primary: #004080;
+            --color-primary-dark: #002d5a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -33,8 +38,8 @@
             height: 100%;
             opacity: 0.04;
             background-image:
-                radial-gradient(circle at 25% 25%, #004080 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, #004080 1px, transparent 1px);
+                radial-gradient(circle at 25% 25%, var(--color-primary) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, var(--color-primary) 1px, transparent 1px);
             background-size: 60px 60px, 40px 40px;
             background-position: 0 0, 30px 30px;
             z-index: 1;
@@ -72,7 +77,7 @@
 
         /* Left Side - Logo Section */
         .logo-section {
-            background: linear-gradient(135deg, #004080 0%, #002d5a 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -185,7 +190,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 30px;
             font-weight: 600;
-            color: #004080;
+            color: var(--color-primary);
             margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
         }
@@ -206,7 +211,7 @@
             font-family: 'DM Sans', sans-serif;
             font-size: 12px;
             font-weight: 600;
-            color: #004080;
+            color: var(--color-primary);
             margin-bottom: 0.7rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -249,7 +254,7 @@
         }
 
         .form-input:focus {
-            border-color: #004080;
+            border-color: var(--color-primary);
             background: #ffffff;
             box-shadow: 0 0 0 4px rgba(0, 64, 128, 0.08);
             transform: translateY(-2px);
@@ -275,7 +280,7 @@
         }
 
         .password-toggle:hover {
-            color: #004080;
+            color: var(--color-primary);
             background: rgba(0, 64, 128, 0.08);
         }
 
@@ -295,7 +300,7 @@
             width: 18px;
             height: 18px;
             margin-right: 10px;
-            accent-color: #004080;
+            accent-color: var(--color-primary);
             cursor: pointer;
         }
 
@@ -309,7 +314,7 @@
 
         .login-button {
             width: 100%;
-            background: linear-gradient(135deg, #004080 0%, #002d5a 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: #ffffff;
             border: none;
             padding: 18px;

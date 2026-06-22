@@ -1,5 +1,5 @@
     {{-- ────────────────────────── HEADER ────────────────────────── --}}
-    <header class="bg-[#004080] text-white px-5 pt-5 pb-4 relative overflow-hidden">
+    <header class="bg-brand text-white px-5 pt-5 pb-4 relative overflow-hidden">
         {{-- decorative circles --}}
         <span class="absolute -top-8 -right-8 w-36 h-36 rounded-full bg-white/5"></span>
         <span class="absolute top-12 -right-4 w-20 h-20 rounded-full bg-white/5"></span>

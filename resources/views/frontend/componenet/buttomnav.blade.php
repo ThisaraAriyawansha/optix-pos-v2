@@ -24,7 +24,7 @@
 
         {{-- Home --}}
         <a href="{{ route('home') }}" class="flex items-center justify-center">
-            <span class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#004080] flex items-center justify-center shadow-md ring-2 sm:ring-4 ring-white/60 active:scale-95 transition-transform">
+            <span class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-brand flex items-center justify-center shadow-md ring-2 sm:ring-4 ring-white/60 active:scale-95 transition-transform">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
@@ -41,10 +41,10 @@
 
         {{-- Sale --}}
         <a href="#" class="flex flex-col items-center justify-center gap-0.5 py-1 sm:py-1.5 rounded-2xl active:bg-white/40 transition-colors">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#004080]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
             </svg>
-            <span class="text-[9px] sm:text-[10px] font-semibold text-[#004080] whitespace-nowrap">Sale</span>
+            <span class="text-[9px] sm:text-[10px] font-semibold text-brand whitespace-nowrap">Sale</span>
         </a>
 
     </div>
