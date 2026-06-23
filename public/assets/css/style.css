@@ -50,6 +50,10 @@
     border-color: var(--color-primary);
 }
 
+.text-accent {
+    color: var(--color-accent);
+}
+
 /* ────────────────────────── SURFACE UTILITIES ────────────────────────── */
 .bg-page {
     background-color: var(--bg-page);

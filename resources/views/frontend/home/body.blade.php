@@ -139,6 +139,19 @@
                 </span>
             </a>
 
+            {{-- Branches --}}
+            <a href="{{ route('branches') }}" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V5a1 1 0 011-1h6a1 1 0 011 1v16M13 21V9a1 1 0 011-1h5a1 1 0 011 1v12M9 7h.01M9 11h.01M9 15h.01"/>
+                    </svg>
+                </div>
+                <span class="flex flex-col items-center gap-0.5">
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Branches</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Manage locations</span>
+                </span>
+            </a>
+
             {{-- Settings --}}
             <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
