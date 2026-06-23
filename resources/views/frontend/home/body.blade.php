@@ -75,7 +75,7 @@
             </a>
 
             {{-- User Management --}}
-            <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
+            <a href="{{ route('users') }}" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
