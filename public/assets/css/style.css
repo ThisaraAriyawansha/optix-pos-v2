@@ -54,6 +54,16 @@
     color: var(--color-accent);
 }
 
+/* ────────────────────────── ICON BUTTON HOVER ────────────────────────── */
+/* Tailwind's CDN build only generates hover: variants for its own utilities,
+   not for custom classes like bg-brand/border-brand above, so the hover
+   state for brand-colored buttons is defined here instead. */
+.btn-icon-brand:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
 /* ────────────────────────── SURFACE UTILITIES ────────────────────────── */
 .bg-page {
     background-color: var(--bg-page);
