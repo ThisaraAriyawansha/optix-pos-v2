@@ -46,6 +46,10 @@
     color: var(--color-primary);
 }
 
+.dark .text-brand {
+    color: #ffffff;
+}
+
 .border-brand {
     border-color: var(--color-primary);
 }
