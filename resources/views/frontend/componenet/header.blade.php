@@ -6,7 +6,7 @@
 
         <div class="relative z-10 flex flex-wrap items-center justify-between gap-y-2 sm:grid sm:grid-cols-3 sm:gap-0">
             {{-- logo + greeting --}}
-            <div class="flex items-center gap-3 order-1 justify-self-start">
+            <a href="{{ route('home') }}" class="flex items-center gap-3 order-1 justify-self-start">
                 <img src="{{ asset('assets/img/pageImg/78678687687.png') }}"
                      alt="OptiX"
                      class="w-10 h-10 rounded-xl object-contain bg-white/10 p-1 shrink-0">
@@ -14,7 +14,7 @@
                     <p class="text-white/60 text-xs font-sans">Welcome to</p>
                     <h1 class="font-heading font-bold text-lg leading-tight tracking-wide">OptiX POS</h1>
                 </div>
-            </div>
+            </a>
 
             {{-- live date + time --}}
             <div class="w-full sm:w-auto flex flex-col items-center justify-center order-3 sm:order-2 justify-self-center">
