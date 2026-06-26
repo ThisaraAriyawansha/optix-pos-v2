@@ -14,11 +14,22 @@ class UserController extends Controller
         return view('frontend.users.main.index');
     }
 
-    public function manage()
+    public function manage(Request $request)
     {
-        $users = User::with(['role', 'branch'])->latest()->get();
+        $search = $request->query('search');
 
-        return view('frontend.users.manage.index', compact('users'));
+        $users = User::with(['role', 'branch'])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('phone_number', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->get();
+
+        return view('frontend.users.manage.index', compact('users', 'search'));
     }
 
     public function create()
