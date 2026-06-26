@@ -25,6 +25,7 @@
                         <tr class="bg-surface-alt text-left text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide">
                             <th class="px-4 py-3 font-medium">Role Name</th>
                             <th class="px-4 py-3 font-medium">Users Assigned</th>
+                            <th class="px-4 py-3 font-medium text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 dark:divide-[#1c3350]">
@@ -32,6 +33,12 @@
                             <tr>
                                 <td class="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $role->name }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $role->users_count }}</td>
+                                <td class="px-4 py-3 text-right whitespace-nowrap">
+                                    <a href="{{ route('roles.edit', $role) }}"
+                                       class="text-brand text-xs font-medium hover:underline">
+                                        Edit
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

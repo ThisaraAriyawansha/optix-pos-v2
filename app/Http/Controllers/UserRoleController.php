@@ -29,4 +29,20 @@ class UserRoleController extends Controller
 
         return redirect()->route('roles.manage')->with('success', 'User role added successfully.');
     }
+
+    public function edit(UserRole $role)
+    {
+        return view('frontend.users.role.editrole.index', compact('role'));
+    }
+
+    public function update(Request $request, UserRole $role)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:user_roles,name,' . $role->id],
+        ]);
+
+        $role->update($validated);
+
+        return redirect()->route('roles.manage')->with('success', 'User role updated successfully.');
+    }
 }

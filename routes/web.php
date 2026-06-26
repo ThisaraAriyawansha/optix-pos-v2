@@ -40,3 +40,5 @@ Route::patch('/users/{user}/toggle-status', [UserController::class, 'toggleStatu
 Route::get('/users/roles', [UserRoleController::class, 'manage'])->name('roles.manage');
 Route::get('/users/roles/create', [UserRoleController::class, 'create'])->name('roles.create');
 Route::post('/users/roles', [UserRoleController::class, 'store'])->name('roles.store');
+Route::get('/users/roles/{role}/edit', [UserRoleController::class, 'edit'])->name('roles.edit');
+Route::put('/users/roles/{role}', [UserRoleController::class, 'update'])->name('roles.update');
