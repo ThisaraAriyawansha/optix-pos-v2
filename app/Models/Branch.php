@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Branch extends Model
 {
@@ -18,4 +19,9 @@ class Branch extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function suppliers(): HasMany
+    {
+        return $this->hasMany(Supplier::class);
+    }
 }

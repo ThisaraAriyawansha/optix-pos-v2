@@ -7,6 +7,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\SupplierController;
+
+
 
 // Login Page
 Route::get('/', [LoginController::class, 'login'])->name('login');
@@ -42,3 +45,12 @@ Route::get('/users/roles/create', [UserRoleController::class, 'create'])->name('
 Route::post('/users/roles', [UserRoleController::class, 'store'])->name('roles.store');
 Route::get('/users/roles/{role}/edit', [UserRoleController::class, 'edit'])->name('roles.edit');
 Route::put('/users/roles/{role}', [UserRoleController::class, 'update'])->name('roles.update');
+
+
+//Suppliers Page
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
+Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
+Route::post('/suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
+Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
+Route::put('/suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
+Route::patch('/suppliers/{supplier}/toggle-status', [SupplierController::class, 'toggleStatus'])->name('suppliers.toggleStatus');
