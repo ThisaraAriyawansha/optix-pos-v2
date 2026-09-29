@@ -43,8 +43,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Orders</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track orders</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Sales</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track sales</span>
                 </span>
             </a>
 
@@ -95,8 +95,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Projects</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track projects</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Attendance</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track attendance</span>
                 </span>
             </a>
 
