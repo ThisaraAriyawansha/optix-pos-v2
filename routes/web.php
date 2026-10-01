@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SettingController;
 
 
 
@@ -72,3 +73,11 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
 Route::patch('/customers/{customer}/toggle-status', [CustomerController::class, 'toggleStatus'])->name('customers.toggleStatus');
+
+
+// Settings Page
+Route::middleware('auth')->group(function () {
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::get('/settings/profile', [SettingController::class, 'profile'])->name('settings.profile');
+    Route::put('/settings/profile', [SettingController::class, 'updateProfile'])->name('settings.profile.update');
+});

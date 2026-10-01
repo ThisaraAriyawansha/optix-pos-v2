@@ -160,5 +160,13 @@
     "User role updated successfully.": "පරිශීලක භූමිකාව සාර්ථකව යාවත්කාලීන කරන ලදී.",
 
     ":name is now active.": ":name දැන් සක්‍රීයයි.",
-    ":name is now inactive.": ":name දැන් අක්‍රීයයි."
+    ":name is now inactive.": ":name දැන් අක්‍රීයයි.",
+
+    "Manage Profile": "පැතිකඩ කළමනාකරණය",
+    "Update your personal details": "ඔබගේ පුද්ගලික තොරතුරු යාවත්කාලීන කරන්න",
+    "Profile updated successfully.": "පැතිකඩ සාර්ථකව යාවත්කාලීන කරන ලදී.",
+    "Change Password": "මුරපදය වෙනස් කරන්න",
+    "Current Password": "වත්මන් මුරපදය",
+    "Leave blank to keep your current password.": "ඔබගේ වත්මන් මුරපදය තබා ගැනීමට හිස්ව තබන්න.",
+    "Required to set a new password": "නව මුරපදයක් සැකසීමට අවශ්‍යයි"
 }
