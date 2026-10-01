@@ -14,8 +14,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V5a1 1 0 011-1h6a1 1 0 011 1v16M13 21V9a1 1 0 011-1h5a1 1 0 011 1v12M9 7h.01M9 11h.01M9 15h.01"/>
                 </svg>
             </div>
-            <p class="font-heading font-semibold text-gray-900 dark:text-white text-sm">No branches yet</p>
-            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">Add your first branch to get started.</p>
+            <p class="font-heading font-semibold text-gray-900 dark:text-white text-sm">{{ __('No branches yet') }}</p>
+            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">{{ __('Add your first branch to get started.') }}</p>
         </div>
     @else
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -38,7 +38,7 @@
                                 @method('PATCH')
                                 <button type="submit" class="shrink-0 px-2 py-0.5 rounded-full text-[11px] font-medium active:scale-90 transition-transform
                                     {{ $branch->status ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400' }}">
-                                    {{ $branch->status ? 'Active' : 'Inactive' }}
+                                    {{ $branch->status ? __('Active') : __('Inactive') }}
                                 </button>
                             </form>
                         </div>

@@ -14,8 +14,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                 </svg>
             </div>
-            <p class="font-heading font-semibold text-gray-900 dark:text-white text-sm">No roles yet</p>
-            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">Add your first role to get started.</p>
+            <p class="font-heading font-semibold text-gray-900 dark:text-white text-sm">{{ __('No roles yet') }}</p>
+            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">{{ __('Add your first role to get started.') }}</p>
         </div>
     @else
         <div class="rounded-2xl bg-surface border border-subtle overflow-hidden">
@@ -23,9 +23,9 @@
                 <table class="w-full text-sm font-sans">
                     <thead>
                         <tr class="bg-surface-alt text-left text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide">
-                            <th class="px-4 py-3 font-medium">Role Name</th>
-                            <th class="px-4 py-3 font-medium">Users Assigned</th>
-                            <th class="px-4 py-3 font-medium text-right">Actions</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Role Name') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Users Assigned') }}</th>
+                            <th class="px-4 py-3 font-medium text-right">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 dark:divide-[#1c3350]">
@@ -36,7 +36,7 @@
                                 <td class="px-4 py-3 text-right whitespace-nowrap">
                                     <a href="{{ route('roles.edit', $role) }}"
                                        class="text-brand text-xs font-medium hover:underline">
-                                        Edit
+                                        {{ __('Edit') }}
                                     </a>
                                 </td>
                             </tr>

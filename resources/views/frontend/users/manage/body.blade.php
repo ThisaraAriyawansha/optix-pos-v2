@@ -27,14 +27,14 @@
                 <table class="w-full text-sm font-sans">
                     <thead>
                         <tr class="bg-surface-alt text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-300 dark:border-[#2a4a70]">
-                            <th class="px-4 py-3 font-medium">Name</th>
-                            <th class="px-4 py-3 font-medium">Email</th>
-                            <th class="px-4 py-3 font-medium">Phone</th>
-                            <th class="px-4 py-3 font-medium">Address</th>
-                            <th class="px-4 py-3 font-medium">Role</th>
-                            <th class="px-4 py-3 font-medium">Branch</th>
-                            <th class="px-4 py-3 font-medium">Status</th>
-                            <th class="px-4 py-3 font-medium text-right">Edit</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Name') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Email') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Phone') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Address') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Role') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Branch') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Status') }}</th>
+                            <th class="px-4 py-3 font-medium text-right">{{ __('Edit') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-[#24446a]">
@@ -63,7 +63,7 @@
                                         @method('PATCH')
                                         <button type="submit" class="shrink-0 px-2 py-0.5 rounded-full text-[11px] font-medium active:scale-90 transition-transform
                                             {{ $user->status ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400' }}">
-                                            {{ $user->status ? 'Active' : 'Inactive' }}
+                                            {{ $user->status ? __('Active') : __('Inactive') }}
                                         </button>
                                     </form>
                                 </td>

@@ -6,19 +6,19 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
             </svg>
             <input type="text" name="search" value="{{ $search }}"
-                   placeholder="Search by name, phone, email or NIC"
+                   placeholder="{{ __('Search by name, phone, email or NIC') }}"
                    class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
         </div>
 
         <button type="submit"
                 class="px-4 py-2.5 rounded-xl bg-brand text-white text-sm font-medium active:scale-95 transition-transform">
-            Search
+            {{ __('Search') }}
         </button>
 
         @if ($search)
             <a href="{{ route('suppliers') }}"
                class="px-4 py-2.5 rounded-xl bg-surface-alt border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 text-sm font-medium active:scale-95 transition-transform">
-                Clear
+                {{ __('Clear') }}
             </a>
         @endif
     </form>

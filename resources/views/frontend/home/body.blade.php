@@ -2,23 +2,36 @@
     <main class="px-5 pt-6 pb-28 max-w-6xl mx-auto">
 
         <div class="flex items-center justify-between">
-            <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-lg tracking-tight">Main Menu</h2>
-            <span class="text-xs text-gray-400 dark:text-gray-500 font-sans">Tap to open</span>
+            <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-lg tracking-tight">{{ __('Main Menu') }}</h2>
+            <span class="text-xs text-gray-400 dark:text-gray-500 font-sans">{{ __('Tap to open') }}</span>
         </div>
         <div class="h-px bg-gray-200/80 dark:bg-[#1c3350] mt-3 mb-6"></div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
 
-            {{-- New Sale --}}
+            {{-- Dashboard --}}
             <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-brand text-white shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h5a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM13 5a1 1 0 011-1h5a1 1 0 011 1v3a1 1 0 01-1 1h-5a1 1 0 01-1-1V5zM13 13a1 1 0 011-1h5a1 1 0 011 1v6a1 1 0 01-1 1h-5a1 1 0 01-1-1v-6zM4 16a1 1 0 011-1h5a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3z"/>
+                    </svg>
+                </div>
+                <span class="flex flex-col items-center gap-0.5">
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight">{{ __('Dashboard') }}</span>
+                    <span class="text-[11px] text-white/60">{{ __('Overview of your business') }}</span>
+                </span>
+            </a>
+
+            {{-- New Sale --}}
+            <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight">New Sale</span>
-                    <span class="text-[11px] text-white/60">Start a transaction</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('New Sale') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Start a transaction') }}</span>
                 </span>
             </a>
 
@@ -30,8 +43,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Products</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Manage inventory</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Products') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Manage inventory') }}</span>
                 </span>
             </a>
 
@@ -39,12 +52,12 @@
             <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7a2 2 0 012-2h6a2 2 0 012 2v10m-10 0a2 2 0 002 2h6a2 2 0 002-2m-10 0H5a2 2 0 01-2-2V9a2 2 0 012-2h2"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 3h12v18l-3-2-3 2-3-2-3 2V3zM9 8h6M9 12h6M9 16h3"/>
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Sales</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track sales</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Sales') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Track sales') }}</span>
                 </span>
             </a>
 
@@ -56,8 +69,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Suppliers</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Manage suppliers</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Suppliers') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Manage suppliers') }}</span>
                 </span>
             </a>
 
@@ -69,8 +82,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Customers</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Customer records</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Customers') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Customer records') }}</span>
                 </span>
             </a>
 
@@ -82,12 +95,12 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Users</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Manage accounts</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Users') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Manage accounts') }}</span>
                 </span>
             </a>
 
-            {{-- Project Management --}}
+            {{-- Attendance Management --}}
             <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -95,8 +108,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Attendance</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track attendance</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Attendance') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Track attendance') }}</span>
                 </span>
             </a>
 
@@ -108,21 +121,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Reports</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">View analytics</span>
-                </span>
-            </a>
-
-            {{-- Repairs / Services --}}
-            <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
-                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.77z"/>
-                    </svg>
-                </div>
-                <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Repairs</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Service requests</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Reports') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('View analytics') }}</span>
                 </span>
             </a>
 
@@ -130,12 +130,12 @@
             <a href="#" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.66 0-3 .9-3 2s1.34 2 3 2 3 .9 3 2-1.34 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 10v2m0-12a8 8 0 100 16 8 8 0 000-16z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7V5a1 1 0 00-1-1H5a2 2 0 000 4h14a1 1 0 011 1v3m0 4v3a1 1 0 01-1 1H5a2 2 0 01-2-2V6m17 6v4h-4a2 2 0 010-4h4z"/>
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Expenses</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Track spending</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Expenses') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Track spending') }}</span>
                 </span>
             </a>
 
@@ -147,8 +147,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Branches</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">Manage locations</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Branches') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Manage locations') }}</span>
                 </span>
             </a>
 
@@ -161,8 +161,8 @@
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
-                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Settings</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">App preferences</span>
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Settings') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('App preferences') }}</span>
                 </span>
             </a>
 

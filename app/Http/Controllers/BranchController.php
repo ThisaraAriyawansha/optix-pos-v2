@@ -31,7 +31,7 @@ class BranchController extends Controller
 
         Branch::create($validated);
 
-        return redirect()->route('branches')->with('success', 'Branch added successfully.');
+        return redirect()->route('branches')->with('success', __('Branch added successfully.'));
     }
 
     public function edit(Branch $branch)
@@ -54,13 +54,13 @@ class BranchController extends Controller
 
         $branch->update($validated);
 
-        return redirect()->route('branches')->with('success', 'Branch updated successfully.');
+        return redirect()->route('branches')->with('success', __('Branch updated successfully.'));
     }
 
     public function toggleStatus(Branch $branch)
     {
         $branch->update(['status' => ! $branch->status]);
 
-        return redirect()->route('branches')->with('success', "{$branch->name} is now ".($branch->status ? 'active' : 'inactive').'.');
+        return redirect()->route('branches')->with('success', __($branch->status ? ':name is now active.' : ':name is now inactive.', ['name' => $branch->name]));
     }
 }

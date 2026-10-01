@@ -54,7 +54,7 @@ class UserController extends Controller
 
         User::create($validated);
 
-        return redirect()->route('users.manage')->with('success', 'User added successfully.');
+        return redirect()->route('users.manage')->with('success', __('User added successfully.'));
     }
 
     public function edit(User $user)
@@ -86,13 +86,13 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('users.manage')->with('success', 'User updated successfully.');
+        return redirect()->route('users.manage')->with('success', __('User updated successfully.'));
     }
 
     public function toggleStatus(User $user)
     {
         $user->update(['status' => ! $user->status]);
 
-        return redirect()->route('users.manage')->with('success', "{$user->name} is now ".($user->status ? 'active' : 'inactive').'.');
+        return redirect()->route('users.manage')->with('success', __($user->status ? ':name is now active.' : ':name is now inactive.', ['name' => $user->name]));
     }
 }

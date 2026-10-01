@@ -19,6 +19,14 @@ Route::post('/login', [LoginController::class, 'postLogin'])->name('login.post')
 //Home Page
 Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware('auth');
 
+// Language switch
+Route::get('/lang/{locale}', function (string $locale) {
+    if (in_array($locale, \App\Http\Middleware\SetLocale::SUPPORTED, true)) {
+        session(['locale' => $locale]);
+    }
+    return back();
+})->name('lang.switch');
+
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 

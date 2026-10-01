@@ -17,8 +17,8 @@
                 </svg>
             </div>
             <span class="flex flex-col items-center gap-0.5">
-                <span class="font-medium text-sm sm:text-[15px] tracking-tight">Manage Roles</span>
-                <span class="text-[11px] text-white/60">View &amp; add roles</span>
+                <span class="font-medium text-sm sm:text-[15px] tracking-tight">{{ __('Manage Roles') }}</span>
+                <span class="text-[11px] text-white/60">{{ __('View & add roles') }}</span>
             </span>
         </a>
 
@@ -30,8 +30,8 @@
                 </svg>
             </div>
             <span class="flex flex-col items-center gap-0.5">
-                <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">Manage Users</span>
-                <span class="text-[11px] text-gray-400 dark:text-gray-500">View &amp; add users</span>
+                <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Manage Users') }}</span>
+                <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('View & add users') }}</span>
             </span>
         </a>
 

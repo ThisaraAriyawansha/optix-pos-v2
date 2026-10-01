@@ -47,7 +47,7 @@ class SupplierController extends Controller
 
         Supplier::create($validated);
 
-        return redirect()->route('suppliers')->with('success', 'Supplier added successfully.');
+        return redirect()->route('suppliers')->with('success', __('Supplier added successfully.'));
     }
 
     public function edit(Supplier $supplier)
@@ -73,13 +73,13 @@ class SupplierController extends Controller
 
         $supplier->update($validated);
 
-        return redirect()->route('suppliers')->with('success', 'Supplier updated successfully.');
+        return redirect()->route('suppliers')->with('success', __('Supplier updated successfully.'));
     }
 
     public function toggleStatus(Supplier $supplier)
     {
         $supplier->update(['is_active' => ! $supplier->is_active]);
 
-        return redirect()->route('suppliers')->with('success', "{$supplier->name} is now ".($supplier->is_active ? 'active' : 'inactive').'.');
+        return redirect()->route('suppliers')->with('success', __($supplier->is_active ? ':name is now active.' : ':name is now inactive.', ['name' => $supplier->name]));
     }
 }

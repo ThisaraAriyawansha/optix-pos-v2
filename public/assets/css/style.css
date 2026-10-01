@@ -5,8 +5,8 @@
     --color-primary-dark: #002d5a;
     --color-accent: #F53003;
 
-    --font-heading: 'Poppins', 'DM Sans', sans-serif;
-    --font-body: 'DM Sans', 'Poppins', sans-serif;
+    --font-heading: 'Poppins', 'DM Sans', 'Noto Sans Sinhala', sans-serif;
+    --font-body: 'DM Sans', 'Poppins', 'Noto Sans Sinhala', sans-serif;
 
     --radius-card: 1rem; /* rounded-2xl */
     --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

@@ -27,7 +27,7 @@ class UserRoleController extends Controller
 
         UserRole::create($validated);
 
-        return redirect()->route('roles.manage')->with('success', 'User role added successfully.');
+        return redirect()->route('roles.manage')->with('success', __('User role added successfully.'));
     }
 
     public function edit(UserRole $role)
@@ -43,6 +43,6 @@ class UserRoleController extends Controller
 
         $role->update($validated);
 
-        return redirect()->route('roles.manage')->with('success', 'User role updated successfully.');
+        return redirect()->route('roles.manage')->with('success', __('User role updated successfully.'));
     }
 }

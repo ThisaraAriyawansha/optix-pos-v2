@@ -47,7 +47,7 @@ class CustomerController extends Controller
 
         Customer::create($validated);
 
-        return redirect()->route('customers')->with('success', 'Customer added successfully.');
+        return redirect()->route('customers')->with('success', __('Customer added successfully.'));
     }
 
     public function edit(Customer $customer)
@@ -71,14 +71,14 @@ class CustomerController extends Controller
 
         $customer->update($validated);
 
-        return redirect()->route('customers')->with('success', 'Customer updated successfully.');
+        return redirect()->route('customers')->with('success', __('Customer updated successfully.'));
     }
 
     public function toggleStatus(Customer $customer)
     {
         $customer->update(['is_active' => ! $customer->is_active]);
 
-        return redirect()->route('customers')->with('success', "{$customer->name} is now ".($customer->is_active ? 'active' : 'inactive').'.');
+        return redirect()->route('customers')->with('success', __($customer->is_active ? ':name is now active.' : ':name is now inactive.', ['name' => $customer->name]));
     }
 
     protected function generateCustomerCode(): string

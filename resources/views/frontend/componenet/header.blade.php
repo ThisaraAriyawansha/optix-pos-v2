@@ -11,7 +11,7 @@
                      alt="OptiX"
                      class="w-10 h-10 rounded-xl object-contain bg-white/10 p-1 shrink-0">
                 <div>
-                    <p class="text-white/60 text-xs font-sans">Welcome to</p>
+                    <p class="text-white/60 text-xs font-sans">{{ __('Welcome to') }}</p>
                     <h1 class="font-heading font-bold text-lg leading-tight tracking-wide">OptiX POS</h1>
                 </div>
             </a>
@@ -34,20 +34,71 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z"/>
                     </svg>
                 </button>
-                {{-- logout --}}
+                {{-- user menu --}}
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="hidden">
                     @csrf
                 </form>
-                <button type="button" onclick="openLogoutModal()" class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 active:bg-white/20 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                    </svg>
-                </button>
+                @php
+                    $authUser  = auth()->user();
+                    $firstName = $authUser ? \Illuminate\Support\Str::of($authUser->name)->trim()->explode(' ')->first() : __('Guest');
+                    $initials  = \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($firstName, 0, 1));
+                    $locale    = app()->getLocale();
+                @endphp
+                <div id="userMenu" class="relative">
+                    <button type="button" onclick="toggleUserMenu(event)"
+                            class="flex items-center gap-2 h-10 pl-1 pr-2 rounded-xl bg-white/10 active:bg-white/20 transition-colors">
+                        <span style="color: var(--color-primary)" class="w-8 h-8 rounded-lg bg-white flex items-center justify-center font-heading font-bold text-sm shrink-0">
+                            {{ $initials }}
+                        </span>
+                        <span class="hidden sm:block text-sm font-medium font-sans max-w-[7rem] truncate">{{ $firstName }}</span>
+                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
     </header>
+
+    {{-- ────────────────────────── USER DROPDOWN ────────────────────────── --}}
+    <div id="userDropdown" class="hidden fixed z-[90] w-56 bg-surface rounded-2xl shadow-xl border border-subtle overflow-hidden">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-subtle">
+            <span class="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center font-heading font-bold shrink-0">
+                {{ $initials }}
+            </span>
+            <div class="min-w-0">
+                <p class="font-heading font-semibold text-sm text-gray-900 dark:text-white truncate">{{ $authUser->name ?? $firstName }}</p>
+                @if ($authUser && $authUser->role)
+                    <p class="text-xs text-gray-400 dark:text-gray-500 font-sans truncate">{{ $authUser->role->name }}</p>
+                @endif
+            </div>
+        </div>
+
+        {{-- language switch --}}
+        <div class="px-4 py-3 border-b border-subtle">
+            <p class="text-[11px] uppercase tracking-wide text-gray-400 dark:text-gray-500 font-sans mb-2">{{ __('Language') }}</p>
+            <div class="grid grid-cols-2 gap-1 p-1 rounded-xl bg-surface-alt">
+                <a href="{{ route('lang.switch', 'en') }}"
+                   class="py-1.5 rounded-lg text-center text-xs font-semibold transition-colors {{ $locale === 'en' ? 'bg-brand text-white' : 'text-gray-600 dark:text-gray-300' }}">
+                    English
+                </a>
+                <a href="{{ route('lang.switch', 'si') }}"
+                   class="py-1.5 rounded-lg text-center text-xs font-semibold transition-colors {{ $locale === 'si' ? 'bg-brand text-white' : 'text-gray-600 dark:text-gray-300' }}">
+                    සිංහල
+                </a>
+            </div>
+        </div>
+
+        <button type="button" onclick="closeUserMenu(); openLogoutModal()"
+                class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-500 active:bg-surface-alt transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            {{ __('Log out') }}
+        </button>
+    </div>
 
     {{-- ────────────────────────── LOGOUT CONFIRM MODAL ────────────────────────── --}}
     <div id="logoutModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center px-6">
@@ -60,40 +111,81 @@
                           d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
                 </svg>
             </div>
-            <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-base">Log out of OptiX POS?</h2>
-            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1 font-sans">You'll need to sign in again to continue.</p>
+            <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-base">{{ __('Log out of OptiX POS?') }}</h2>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1 font-sans">{{ __("You'll need to sign in again to continue.") }}</p>
 
             <div class="flex gap-2 mt-5">
                 <button type="button" onclick="closeLogoutModal()"
                         class="flex-1 py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">
-                    Cancel
+                    {{ __('Cancel') }}
                 </button>
                 <button type="button" onclick="document.getElementById('logoutForm').submit()"
                         class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-brand text-white active:scale-95 transition-transform">
-                    Log out
+                    {{ __('Log out') }}
                 </button>
             </div>
         </div>
     </div>
 
     <script>
+        const APP_LOCALE = '{{ app()->getLocale() === 'si' ? 'si-LK' : 'en-US' }}';
+        const SI_MONTHS = ['ජනවාරි', 'පෙබරවාරි', 'මාර්තු', 'අප්‍රේල්', 'මැයි', 'ජූනි', 'ජූලි', 'අගෝස්තු', 'සැප්තැම්බර්', 'ඔක්තෝබර්', 'නොවැම්බර්', 'දෙසැම්බර්'];
+        const SI_DAYS = ['ඉරිදා', 'සඳුදා', 'අඟහරුවාදා', 'බදාදා', 'බ්‍රහස්පතින්දා', 'සිකුරාදා', 'සෙනසුරාදා'];
         function updateLiveClock() {
             const now = new Date();
             const timeEl = document.getElementById('liveTime');
             const dateEl = document.getElementById('liveDate');
+            if (APP_LOCALE === 'si-LK') {
+                // Browser si-LK output uses odd abbreviations (e.g. "ඔක්", "බ්‍රහස්"), so format manually
+                const pad = n => String(n).padStart(2, '0');
+                const h = now.getHours();
+                if (timeEl) {
+                    timeEl.textContent = `${pad(h % 12 || 12)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${h < 12 ? 'පෙ.ව.' : 'ප.ව.'}`;
+                }
+                if (dateEl) {
+                    dateEl.textContent = `${SI_DAYS[now.getDay()]}, ${SI_MONTHS[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+                }
+                return;
+            }
             if (timeEl) {
-                timeEl.textContent = now.toLocaleTimeString('en-US', {
+                timeEl.textContent = now.toLocaleTimeString(APP_LOCALE, {
                     hour: '2-digit', minute: '2-digit', second: '2-digit'
                 });
             }
             if (dateEl) {
-                dateEl.textContent = now.toLocaleDateString('en-US', {
+                dateEl.textContent = now.toLocaleDateString(APP_LOCALE, {
                     weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
                 });
             }
         }
         updateLiveClock();
         setInterval(updateLiveClock, 1000);
+
+        function positionUserMenu() {
+            const btn = document.querySelector('#userMenu button');
+            const menu = document.getElementById('userDropdown');
+            const rect = btn.getBoundingClientRect();
+            menu.style.top = (rect.bottom + 8) + 'px';
+            menu.style.right = Math.max(12, window.innerWidth - rect.right) + 'px';
+        }
+        function toggleUserMenu(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('userDropdown');
+            if (menu.classList.contains('hidden')) {
+                positionUserMenu();
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+        function closeUserMenu() {
+            document.getElementById('userDropdown').classList.add('hidden');
+        }
+        document.addEventListener('click', (e) => {
+            if (!document.getElementById('userDropdown').contains(e.target)) closeUserMenu();
+        });
+        window.addEventListener('resize', closeUserMenu);
+        window.addEventListener('scroll', closeUserMenu, { passive: true });
 
         function openLogoutModal() {
             document.getElementById('logoutModal').classList.remove('hidden');

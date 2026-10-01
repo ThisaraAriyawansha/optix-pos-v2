@@ -27,14 +27,14 @@
                 <table class="w-full text-sm font-sans">
                     <thead>
                         <tr class="bg-surface-alt text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-300 dark:border-[#2a4a70]">
-                            <th class="px-4 py-3 font-medium">Name</th>
-                            <th class="px-4 py-3 font-medium">Branch</th>
-                            <th class="px-4 py-3 font-medium">Phone</th>
-                            <th class="px-4 py-3 font-medium">Email</th>
-                            <th class="px-4 py-3 font-medium">Address</th>
-                            <th class="px-4 py-3 font-medium">NIC</th>
-                            <th class="px-4 py-3 font-medium">Status</th>
-                            <th class="px-4 py-3 font-medium text-right">Edit</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Name') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Branch') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Phone') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Email') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Address') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('NIC') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Status') }}</th>
+                            <th class="px-4 py-3 font-medium text-right">{{ __('Edit') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-[#24446a]">
@@ -42,7 +42,7 @@
                             <tr onclick="window.location='{{ route('suppliers.edit', $supplier) }}'"
                                 class="cursor-pointer hover:bg-surface-alt transition-colors">
                                 <td class="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $supplier->name }}</td>
-                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $supplier->branch->name ?? 'No branch' }}</td>
+                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $supplier->branch->name ?? __('No branch') }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $supplier->phone }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $supplier->email ?? '—' }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $supplier->address ?? '—' }}</td>
@@ -53,7 +53,7 @@
                                         @method('PATCH')
                                         <button type="submit" class="shrink-0 px-2 py-0.5 rounded-full text-[11px] font-medium active:scale-90 transition-transform
                                             {{ $supplier->is_active ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400' }}">
-                                            {{ $supplier->is_active ? 'Active' : 'Inactive' }}
+                                            {{ $supplier->is_active ? __('Active') : __('Inactive') }}
                                         </button>
                                     </form>
                                 </td>

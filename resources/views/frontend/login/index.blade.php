@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiX POS</title>
     <link rel="shortcut icon" href="{{ asset('assets/img/pageImg/5646546523465 - Copy.png') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
         :root {
@@ -20,7 +20,7 @@
         }
 
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'DM Sans', 'Noto Sans Sinhala', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
@@ -355,6 +355,30 @@
             transform: translateY(-1px);
         }
 
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .lang-switch a {
+            font-family: 'DM Sans', 'Noto Sans Sinhala', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--color-primary);
+            background: rgba(0, 64, 128, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .lang-switch a.active {
+            background: var(--color-primary);
+            color: #ffffff;
+        }
+
         .footer {
             margin-top: 2rem;
             padding-top: 1.5rem;
@@ -474,22 +498,26 @@
                 </div>
                 
                 <div class="decorative-line"></div>
-                <div class="tagline">Smart, fast and reliable — your all-in-one POS solution built for modern businesses.</div>
+                <div class="tagline">{{ __('Smart, fast and reliable — your all-in-one POS solution built for modern businesses.') }}</div>
             </div>
         </div>
 
         <!-- Right Side - Form Section -->
         <div class="form-section">
+            <div class="lang-switch">
+                <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">English</a>
+                <a href="{{ route('lang.switch', 'si') }}" class="{{ app()->getLocale() === 'si' ? 'active' : '' }}">සිංහල</a>
+            </div>
             <div class="login-header">
-                <h1 class="login-title">Welcome Back</h1>
-                <p class="login-subtitle">Sign in to access your account</p>
+                <h1 class="login-title">{{ __('Welcome Back') }}</h1>
+                <p class="login-subtitle">{{ __('Sign in to access your account') }}</p>
             </div>
 
             <form class="login-form" action="{{ route('login.post') }}" method="POST" id="loginForm">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="form-label" for="email">
-                        Email Address <span class="required">*</span>
+                        {{ __('Email Address') }} <span class="required">*</span>
                     </label>
                     <div class="input-wrapper">
                         <input
@@ -497,7 +525,7 @@
                             id="email"
                             name="email"
                             class="form-input"
-                            placeholder="Enter your email address"
+                            placeholder="{{ __('Enter your email address') }}"
                             required
                             autocomplete="email"
                         >
@@ -506,7 +534,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="password">
-                        Password <span class="required">*</span>
+                        {{ __('Password') }} <span class="required">*</span>
                     </label>
                     <div class="input-wrapper password-wrapper">
                         <input
@@ -514,14 +542,14 @@
                             id="password"
                             name="password"
                             class="form-input password-masked"
-                            placeholder="Enter your password"
+                            placeholder="{{ __('Enter your password') }}"
                             required
                             autocomplete="off"
                             data-lpignore="true"
                             data-1p-ignore
                             data-bwignore
                         >
-                        <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Toggle password visibility">
+                        <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="{{ __('Toggle password visibility') }}">
                             <span id="eyeIcon">👁</span>
                         </button>
                     </div>
@@ -534,12 +562,12 @@
                 @endif
 
                 <button type="submit" class="login-button" id="submitBtn">
-                    Sign In
+                    {{ __('Sign In') }}
                 </button>
             </form>
 
             <div class="footer">
-                <p class="footer-text">2025 &copy; All Rights Reserved | OptiX POS</p>
+                <p class="footer-text">2025 &copy; {{ __('All Rights Reserved') }} | OptiX POS</p>
             </div>
         </div>
     </div>
@@ -561,12 +589,12 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.classList.add('loading');
-            submitBtn.textContent = 'Signing In...';
+            submitBtn.textContent = @json(__('Signing In...'));
             submitBtn.disabled = true;
 
             setTimeout(() => {
                 submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Sign In';
+                submitBtn.textContent = @json(__('Sign In'));
                 submitBtn.disabled = false;
             }, 3000);
         });

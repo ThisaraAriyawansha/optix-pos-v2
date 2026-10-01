@@ -26,15 +26,21 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'These credentials do not match our records.',
+            'email' => __('These credentials do not match our records.'),
         ])->onlyInput('email');
     }
 
     public function logout(Request $request)
     {
+        $locale = $request->session()->get('locale');
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        if ($locale) {
+            $request->session()->put('locale', $locale);
+        }
 
         return redirect()->route('login');
     }

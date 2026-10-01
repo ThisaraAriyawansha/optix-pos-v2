@@ -11,7 +11,7 @@
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
             </svg>
-            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Back</span>
+            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">{{ __('Back') }}</span>
         </a>
 
         {{-- Scan --}}
@@ -19,7 +19,7 @@
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2M3 17v2a2 2 0 002 2h2m10-16h2a2 2 0 012 2v2m-4 12h2a2 2 0 002-2v-2M7 12h10"/>
             </svg>
-            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Scan</span>
+            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">{{ __('Scan') }}</span>
         </a>
 
         {{-- Home --}}
@@ -36,7 +36,7 @@
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6m6 13V10M3 19V12m18 7V3"/>
             </svg>
-            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Reports</span>
+            <span class="text-[9px] sm:text-[10px] font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">{{ __('Reports') }}</span>
         </a>
 
         {{-- Sale --}}
@@ -44,7 +44,7 @@
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
             </svg>
-            <span class="text-[9px] sm:text-[10px] font-semibold text-brand whitespace-nowrap">Sale</span>
+            <span class="text-[9px] sm:text-[10px] font-semibold text-brand whitespace-nowrap">{{ __('Sale') }}</span>
         </a>
 
     </div>

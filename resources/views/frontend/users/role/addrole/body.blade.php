@@ -6,10 +6,10 @@
 
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1.5">
-                Role Name <span class="text-accent">*</span>
+                {{ __('Role Name') }} <span class="text-accent">*</span>
             </label>
             <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                   placeholder="e.g. Cashier, Manager, Admin"
+                   placeholder="{{ __('e.g. Cashier, Manager, Admin') }}"
                    class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
             @error('name')
                 <p class="text-xs text-accent mt-1">{{ $message }}</p>
@@ -19,11 +19,11 @@
         <div class="flex gap-3 pt-2">
             <a href="{{ route('roles.manage') }}"
                class="flex-1 text-center py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">
-                Cancel
+                {{ __('Cancel') }}
             </a>
             <button type="submit"
                     class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-brand text-white active:scale-95 transition-transform">
-                Save Role
+                {{ __('Save Role') }}
             </button>
         </div>
     </form>
