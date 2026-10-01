@@ -1,5 +1,5 @@
 {{-- ────────────────────────── BRANCH LIST BODY ────────────────────────── --}}
-<main class="px-5 pt-5 pb-28 max-w-6xl mx-auto">
+<main class="px-5 pt-5 pb-28 max-w-[1600px] mx-auto">
 
     @if (session('success'))
         <div class="mb-4 px-4 py-3 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-sm font-sans">
@@ -18,10 +18,10 @@
             <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">Add your first branch to get started.</p>
         </div>
     @else
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             @foreach ($branches as $branch)
                 <div onclick="window.location='{{ route('branches.edit', $branch) }}'"
-                     class="rounded-2xl bg-surface border border-subtle p-4 shadow-sm cursor-pointer hover:shadow-md hover:border-brand/30 transition-all">
+                     class="rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] p-4 shadow-sm cursor-pointer hover:shadow-md hover:border-brand transition-all">
                     <div class="flex items-start justify-between gap-2">
                         <h3 class="font-heading font-semibold text-gray-900 dark:text-white text-base tracking-tight">
                             {{ $branch->name }}

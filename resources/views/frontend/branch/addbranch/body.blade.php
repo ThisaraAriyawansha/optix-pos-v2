@@ -1,7 +1,7 @@
 {{-- ────────────────────────── ADD BRANCH FORM ────────────────────────── --}}
-<main class="px-5 pt-5 pb-28 max-w-2xl mx-auto">
+<main class="px-5 pt-5 pb-28 max-w-[1600px] mx-auto">
 
-    <form action="{{ route('branches.store') }}" method="POST" class="rounded-2xl bg-surface border border-subtle p-5 space-y-5">
+    <form action="{{ route('branches.store') }}" method="POST" class="rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] p-5 space-y-5">
         @csrf
 
         <div>
@@ -10,7 +10,7 @@
             </label>
             <input type="text" name="name" id="name" value="{{ old('name') }}" required
                    placeholder="e.g. Colombo Main Branch"
-                   class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
+                   class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
             @error('name')
                 <p class="text-xs text-accent mt-1">{{ $message }}</p>
             @enderror
@@ -22,7 +22,7 @@
             </label>
             <textarea name="description" id="description" rows="3"
                       placeholder="Short note about this branch (optional)"
-                      class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">{{ old('description') }}</textarea>
+                      class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">{{ old('description') }}</textarea>
             @error('description')
                 <p class="text-xs text-accent mt-1">{{ $message }}</p>
             @enderror
@@ -34,7 +34,7 @@
             </label>
             <input type="text" name="address" id="address" value="{{ old('address') }}" required
                    placeholder="e.g. No. 12, Galle Road, Colombo 03"
-                   class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
+                   class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
             @error('address')
                 <p class="text-xs text-accent mt-1">{{ $message }}</p>
             @enderror
@@ -47,7 +47,7 @@
                 </label>
                 <input type="text" name="main_contact" id="main_contact" value="{{ old('main_contact') }}" required
                        placeholder="e.g. 0771234567"
-                       class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
+                       class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
                 @error('main_contact')
                     <p class="text-xs text-accent mt-1">{{ $message }}</p>
                 @enderror
@@ -59,7 +59,7 @@
                 </label>
                 <input type="text" name="secondary_contact" id="secondary_contact" value="{{ old('secondary_contact') }}"
                        placeholder="Optional"
-                       class="w-full px-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
+                       class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
                 @error('secondary_contact')
                     <p class="text-xs text-accent mt-1">{{ $message }}</p>
                 @enderror
@@ -68,7 +68,7 @@
 
         <div class="flex gap-3 pt-2">
             <a href="{{ route('branches') }}"
-               class="flex-1 text-center py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">
+               class="flex-1 text-center py-2.5 rounded-xl text-sm font-medium bg-surface-alt border border-gray-300 dark:border-[#2a4a70] text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">
                 Cancel
             </a>
             <button type="submit"

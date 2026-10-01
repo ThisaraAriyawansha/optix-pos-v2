@@ -1,5 +1,5 @@
 {{-- ────────────────────────── USERS TABLE ────────────────────────── --}}
-<main class="px-5 pt-5 pb-28 max-w-6xl mx-auto">
+<main class="px-5 pt-5 pb-28 max-w-[1600px] mx-auto">
 
     @if (session('success'))
         <div class="mb-4 px-4 py-3 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-sm font-sans">
@@ -22,11 +22,11 @@
             </p>
         </div>
     @else
-        <div class="rounded-2xl bg-surface border border-subtle overflow-hidden">
+        <div class="rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm font-sans">
                     <thead>
-                        <tr class="bg-surface-alt text-left text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide">
+                        <tr class="bg-surface-alt text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-300 dark:border-[#2a4a70]">
                             <th class="px-4 py-3 font-medium">Name</th>
                             <th class="px-4 py-3 font-medium">Email</th>
                             <th class="px-4 py-3 font-medium">Phone</th>
@@ -37,7 +37,7 @@
                             <th class="px-4 py-3 font-medium text-right">Edit</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100 dark:divide-[#1c3350]">
+                    <tbody class="divide-y divide-gray-200 dark:divide-[#24446a]">
                         @foreach ($users as $user)
                             <tr onclick="window.location='{{ route('users.edit', $user) }}'"
                                 class="cursor-pointer hover:bg-surface-alt transition-colors">

@@ -1,5 +1,5 @@
 {{-- ────────────────────────── ADD USER HERO ────────────────────────── --}}
-<section class="px-5 pt-6 max-w-6xl mx-auto">
+<section class="px-5 pt-6 max-w-[1600px] mx-auto">
 
     {{-- breadcrumb --}}
     <nav class="flex items-center gap-1.5 text-xs font-sans text-gray-400 dark:text-gray-500">

@@ -1,5 +1,5 @@
 {{-- ────────────────────────── USER SEARCH ────────────────────────── --}}
-<section class="px-5 pt-4 max-w-6xl mx-auto">
+<section class="px-5 pt-4 max-w-[1600px] mx-auto">
     <form action="{{ route('users.manage') }}" method="GET" class="flex items-center gap-2">
         <div class="relative flex-1">
             <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -7,7 +7,7 @@
             </svg>
             <input type="text" name="search" value="{{ $search }}"
                    placeholder="Search by name, email or phone"
-                   class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-alt border border-subtle text-sm font-sans text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand">
+                   class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
         </div>
 
         <button type="submit"
