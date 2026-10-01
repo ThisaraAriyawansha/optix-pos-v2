@@ -10,6 +10,8 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseCategoryController;
 
 
 
@@ -73,6 +75,26 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
 Route::patch('/customers/{customer}/toggle-status', [CustomerController::class, 'toggleStatus'])->name('customers.toggleStatus');
+
+
+// Expenses Page
+Route::middleware('auth')->group(function () {
+    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses');
+    Route::get('/expenses/list', [ExpenseController::class, 'list'])->name('expenses.list');
+    Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->whereNumber('expense')->name('expenses.edit');
+    Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->whereNumber('expense')->name('expenses.update');
+    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->whereNumber('expense')->name('expenses.destroy');
+
+    // Expense Types
+    Route::get('/expenses/categories', [ExpenseCategoryController::class, 'index'])->name('expenses.categories');
+    Route::post('/expenses/categories', [ExpenseCategoryController::class, 'store'])->name('expenses.categories.store');
+    Route::get('/expenses/categories/{category}/edit', [ExpenseCategoryController::class, 'edit'])->name('expenses.categories.edit');
+    Route::put('/expenses/categories/{category}', [ExpenseCategoryController::class, 'update'])->name('expenses.categories.update');
+    Route::patch('/expenses/categories/{category}/toggle-status', [ExpenseCategoryController::class, 'toggleStatus'])->name('expenses.categories.toggleStatus');
+    Route::delete('/expenses/categories/{category}', [ExpenseCategoryController::class, 'destroy'])->name('expenses.categories.destroy');
+});
 
 
 // Settings Page
