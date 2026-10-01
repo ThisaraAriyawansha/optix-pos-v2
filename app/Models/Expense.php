@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Storage;
 
 class Expense extends Model
 {
@@ -59,7 +58,9 @@ class Expense extends Model
 
     public function receiptUrl(): ?string
     {
-        return $this->receipt_path ? Storage::disk('public')->url($this->receipt_path) : null;
+        // asset() follows the current request host, so links work whether the app
+        // is opened via `php artisan serve` or Apache, regardless of APP_URL.
+        return $this->receipt_path ? asset('storage/'.$this->receipt_path) : null;
     }
 
     public function receiptIsImage(): bool

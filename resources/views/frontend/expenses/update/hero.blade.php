@@ -16,6 +16,6 @@
 
     <h1 class="font-heading font-semibold text-gray-900 dark:text-white text-xl tracking-tight mt-3">{{ __('Edit Expense') }}</h1>
     <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-0.5">
-        {{ $expense->expense_code }} · {{ __('Recorded by :name on :date', ['name' => $expense->user->name ?? __('Unknown'), 'date' => $expense->created_at->format('d M Y, h:i A')]) }}
+        {{ $expense->expense_code }} · {{ __('Recorded by :name on :date', ['name' => $expense->user->name ?? __('Unknown'), 'date' => $expense->created_at->translatedFormat('d M Y, h:i A')]) }}
     </p>
 </section>

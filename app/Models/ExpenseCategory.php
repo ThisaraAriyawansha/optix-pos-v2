@@ -56,6 +56,20 @@ class ExpenseCategory extends Model
         return $this->hasMany(Expense::class);
     }
 
+    /**
+     * Display name in the current language. Seeded default types have entries
+     * in lang/*.json; user-created names fall through unchanged.
+     */
+    public function label(): string
+    {
+        return __($this->name);
+    }
+
+    public function labelDescription(): ?string
+    {
+        return $this->description ? __($this->description) : null;
+    }
+
     public function palette(): array
     {
         return self::COLORS[$this->color] ?? self::COLORS['blue'];

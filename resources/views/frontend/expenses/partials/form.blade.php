@@ -30,7 +30,7 @@
                                 peer-checked:border-[#004080] dark:peer-checked:border-blue-400 peer-checked:bg-blue-50/60 dark:peer-checked:bg-blue-500/10
                                 hover:border-gray-300 dark:hover:border-[#355a85]">
                         @include('frontend.expenses.partials.icon', ['category' => $category, 'size' => 'sm'])
-                        <span class="text-[13px] font-medium text-gray-800 dark:text-gray-100 leading-tight line-clamp-2">{{ $category->name }}</span>
+                        <span class="text-[13px] font-medium text-gray-800 dark:text-gray-100 leading-tight line-clamp-2">{{ $category->label() }}</span>
                     </div>
                     <span class="absolute top-1.5 right-1.5 hidden peer-checked:flex w-4 h-4 rounded-full bg-[#004080] dark:bg-blue-400 text-white items-center justify-center">
                         <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>

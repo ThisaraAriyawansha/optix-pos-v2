@@ -37,7 +37,7 @@
 
     {{-- delete (only types with no expenses) --}}
     <form action="{{ route('expenses.categories.destroy', $category) }}" method="POST"
-          onsubmit="return confirm(this.dataset.confirm)" data-confirm="{{ __('Delete :name?', ['name' => $category->name]) }}"
+          onsubmit="return confirm(this.dataset.confirm)" data-confirm="{{ __('Delete :name?', ['name' => $category->label()]) }}"
           class="mt-4 flex flex-wrap items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-900/10">
         @csrf
         @method('DELETE')

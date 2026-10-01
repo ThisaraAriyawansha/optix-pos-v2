@@ -33,8 +33,8 @@
                             <div class="flex items-start gap-3">
                                 @include('frontend.expenses.partials.icon', ['category' => $category, 'size' => 'lg'])
                                 <div class="min-w-0 flex-1">
-                                    <p class="font-medium text-gray-900 dark:text-white tracking-tight truncate">{{ $category->name }}</p>
-                                    <p class="text-xs text-gray-400 dark:text-gray-500 font-sans line-clamp-2">{{ $category->description ?: __('No description') }}</p>
+                                    <p class="font-medium text-gray-900 dark:text-white tracking-tight truncate">{{ $category->label() }}</p>
+                                    <p class="text-xs text-gray-400 dark:text-gray-500 font-sans line-clamp-2">{{ $category->labelDescription() ?: __('No description') }}</p>
                                 </div>
                                 <form action="{{ route('expenses.categories.toggleStatus', $category) }}" method="POST">
                                     @csrf

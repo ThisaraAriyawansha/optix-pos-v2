@@ -45,13 +45,13 @@ class ExpenseCategoryController extends Controller
     {
         $category->update(['is_active' => ! $category->is_active]);
 
-        return redirect()->route('expenses.categories')->with('success', __($category->is_active ? ':name is now active.' : ':name is now inactive.', ['name' => $category->name]));
+        return redirect()->route('expenses.categories')->with('success', __($category->is_active ? ':name is now active.' : ':name is now inactive.', ['name' => $category->label()]));
     }
 
     public function destroy(ExpenseCategory $category)
     {
         if ($category->expenses()->exists()) {
-            return redirect()->route('expenses.categories')->with('error', __(':name has recorded expenses. Deactivate it instead.', ['name' => $category->name]));
+            return redirect()->route('expenses.categories')->with('error', __(':name has recorded expenses. Deactivate it instead.', ['name' => $category->label()]));
         }
 
         $category->delete();

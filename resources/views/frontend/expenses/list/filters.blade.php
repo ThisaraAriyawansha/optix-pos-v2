@@ -68,7 +68,7 @@
                     <select name="category" class="{{ $field }}">
                         <option value="">{{ __('All types') }}</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ (string) ($filters['category'] ?? '') === (string) $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ (string) ($filters['category'] ?? '') === (string) $category->id ? 'selected' : '' }}>{{ $category->label() }}</option>
                         @endforeach
                     </select>
                 </div>

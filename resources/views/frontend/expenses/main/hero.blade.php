@@ -13,7 +13,7 @@
     <div class="flex flex-wrap items-center justify-between gap-3 mt-3">
         <div>
             <h1 class="font-heading font-semibold text-gray-900 dark:text-white text-xl tracking-tight">{{ __('Expenses') }}</h1>
-            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-0.5">{{ now()->format('F Y') }}</p>
+            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-0.5">{{ now()->translatedFormat('F Y') }}</p>
         </div>
 
         <div class="flex items-center gap-2">

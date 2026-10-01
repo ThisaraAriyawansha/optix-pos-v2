@@ -41,6 +41,7 @@
                             <th class="px-4 py-3 font-medium">{{ __('Description') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Branch') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Payment') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Added By') }}</th>
                             <th class="px-4 py-3 font-medium text-right">{{ __('Amount') }}</th>
                             <th class="px-4 py-3 font-medium text-right">{{ __('Edit') }}</th>
                         </tr>
@@ -50,13 +51,13 @@
                             <tr onclick="window.location='{{ route('expenses.edit', $expense) }}'"
                                 class="cursor-pointer hover:bg-surface-alt transition-colors">
                                 <td class="px-4 py-3 whitespace-nowrap">
-                                    <p class="font-medium text-gray-900 dark:text-white">{{ $expense->expense_date->format('d M Y') }}</p>
+                                    <p class="font-medium text-gray-900 dark:text-white">{{ $expense->expense_date->translatedFormat('d M Y') }}</p>
                                     <p class="text-[11px] text-gray-400 dark:text-gray-500">{{ $expense->expense_code }}</p>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap">
                                     <div class="flex items-center gap-2">
                                         @include('frontend.expenses.partials.icon', ['category' => $expense->category, 'size' => 'sm'])
-                                        <span class="text-gray-700 dark:text-gray-200">{{ $expense->category->name }}</span>
+                                        <span class="text-gray-700 dark:text-gray-200">{{ $expense->category->label() }}</span>
                                     </div>
                                 </td>
                                 <td class="px-4 py-3 min-w-[12rem]">
@@ -80,6 +81,7 @@
                                         {{ $expense->paymentMethodLabel() }}
                                     </span>
                                 </td>
+                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $expense->user->name ?? __('Unknown') }}</td>
                                 <td class="px-4 py-3 text-right font-semibold text-gray-900 dark:text-white whitespace-nowrap">{{ Expense::money($expense->amount) }}</td>
                                 <td class="px-4 py-3 text-right whitespace-nowrap">
                                     <a href="{{ route('expenses.edit', $expense) }}" onclick="event.stopPropagation()"

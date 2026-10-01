@@ -75,7 +75,7 @@
                         <span class="text-[11px] text-gray-400 dark:text-gray-500 font-sans">{{ $share }}%</span>
                     @endif
                 </div>
-                <p class="font-medium text-sm text-gray-900 dark:text-white tracking-tight mt-3 truncate">{{ $category->name }}</p>
+                <p class="font-medium text-sm text-gray-900 dark:text-white tracking-tight mt-3 truncate">{{ $category->label() }}</p>
                 <p class="font-heading font-semibold text-base {{ $category->month_count > 0 ? 'text-gray-900 dark:text-white' : 'text-gray-300 dark:text-gray-600' }} mt-0.5">
                     {{ Expense::money($category->month_total) }}
                 </p>
@@ -118,7 +118,7 @@
                     <div class="min-w-0 flex-1">
                         <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ $expense->title }}</p>
                         <p class="text-[11px] text-gray-400 dark:text-gray-500 font-sans truncate">
-                            {{ $expense->expense_date->format('d M Y') }} · {{ $expense->category->name }} · {{ $expense->branch->name ?? '—' }}
+                            {{ $expense->expense_date->translatedFormat('d M Y') }} · {{ $expense->category->label() }} · {{ $expense->branch->name ?? '—' }}
                         </p>
                     </div>
                     <div class="text-right shrink-0">
