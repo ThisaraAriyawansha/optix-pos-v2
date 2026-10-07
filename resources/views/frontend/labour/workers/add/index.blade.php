@@ -3,7 +3,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Add Worker'),
-        'crumbs' => [__('Labour') => route('labour'), __('Workers') => route('labour.workers'), __('Add') => null],
+        'crumbs' => [__('Workers') => route('labour'), __('All Workers') => route('labour.workers'), __('Add') => null],
         'subtitle' => __('Labourers do not log in — their work is entered by staff'),
     ])
 

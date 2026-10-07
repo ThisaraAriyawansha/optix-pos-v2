@@ -3,7 +3,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Enter Daily Work'),
-        'crumbs' => [__('Labour') => route('labour'), __('Daily Work') => route('labour.work', ['date' => $date]), __('Add') => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Daily Work') => route('labour.work', ['date' => $date]), __('Add') => null],
         'subtitle' => __('Record attendance and the work each worker did today'),
         'actions' => [['url' => route('help').'#daily-work', 'label' => __('Help'), 'icon' => \App\Support\Help::ICON]],
     ])

@@ -6,7 +6,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Attendance Board'),
-        'crumbs' => [__('Labour') => route('labour'), __('Attendance') => route('attendance'), __('Live Board') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('Live Board') => null],
         'subtitle' => $date->translatedFormat('l, d F Y'),
         'actions' => [
             ['url' => route('attendance.people'), 'label' => __('Who Checks In'), 'icon' => 'M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-2.13a4 4 0 100-8 4 4 0 000 8zm6 2a4 4 0 00-3-3.87'],

@@ -6,7 +6,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Pay Salary'),
-        'crumbs' => [__('Labour') => route('labour'), __('Salary') => route('labour.salary'), __('Pay') => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Salary') => route('labour.salary'), __('Pay') => null],
         'subtitle' => __('Pay all unpaid work in a period — one day, a week or a month'),
         'actions' => [['url' => route('help').'#salary', 'label' => __('Help'), 'icon' => \App\Support\Help::ICON]],
     ])

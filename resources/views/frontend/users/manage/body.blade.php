@@ -42,7 +42,13 @@
                         @foreach ($users as $user)
                             <tr onclick="window.location='{{ route('users.edit', $user) }}'"
                                 class="cursor-pointer hover:bg-surface-alt transition-colors">
-                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap font-mono text-xs">{{ $user->employee_code ?? '—' }}</td>
+                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap font-mono text-xs">
+                                    @if (! $user->isEmployee())
+                                        <span class="px-2 py-0.5 rounded-full text-[11px] font-sans font-medium bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300">{{ __('Owner') }}</span>
+                                    @else
+                                        {{ $user->employee_code ?? '—' }}
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $user->name }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $user->email }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $user->phone_number ?? '—' }}</td>

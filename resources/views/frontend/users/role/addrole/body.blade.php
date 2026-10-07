@@ -16,6 +16,8 @@
             @enderror
         </div>
 
+        @include('frontend.users.role.partials.isemployee', ['value' => old('is_employee', 1)])
+
         <div class="flex gap-3 pt-2">
             <a href="{{ route('roles.manage') }}"
                class="flex-1 text-center py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">

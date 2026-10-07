@@ -17,6 +17,14 @@
             @enderror
         </div>
 
+        @include('frontend.users.role.partials.isemployee', ['value' => old('is_employee', $role->is_employee)])
+
+        @if ($role->users()->exists())
+            <p class="text-xs text-gray-400 dark:text-gray-500 font-sans -mt-2">
+                {{ __('Changing this gives or removes the Employee ID of everyone in this role.') }}
+            </p>
+        @endif
+
         <div class="flex gap-3 pt-2">
             <a href="{{ route('roles.manage') }}"
                class="flex-1 text-center py-2.5 rounded-xl text-sm font-medium bg-surface-alt text-gray-700 dark:text-gray-200 active:scale-95 transition-transform">

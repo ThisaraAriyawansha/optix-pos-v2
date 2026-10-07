@@ -24,6 +24,7 @@
                     <thead>
                         <tr class="bg-surface-alt text-left text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide">
                             <th class="px-4 py-3 font-medium">{{ __('Role Name') }}</th>
+                            <th class="px-4 py-3 font-medium">{{ __('Employee?') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Users Assigned') }}</th>
                             <th class="px-4 py-3 font-medium text-right">{{ __('Actions') }}</th>
                         </tr>
@@ -32,6 +33,13 @@
                         @foreach ($roles as $role)
                             <tr>
                                 <td class="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $role->name }}</td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    @if ($role->is_employee)
+                                        <span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400">{{ __('Yes, Employee') }}</span>
+                                    @else
+                                        <span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300">{{ __('No, Owner') }}</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $role->users_count }}</td>
                                 <td class="px-4 py-3 text-right whitespace-nowrap">
                                     <a href="{{ route('roles.edit', $role) }}"

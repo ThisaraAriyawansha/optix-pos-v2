@@ -6,7 +6,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Attendance History'),
-        'crumbs' => [__('Labour') => route('labour'), __('Attendance') => route('attendance.board'), __('History') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('History') => null],
         'subtitle' => $from->format('d M Y').' – '.$to->format('d M Y'),
         'actions' => [['url' => route('attendance.board'), 'label' => __('Live Board'), 'icon' => 'M9 19V6m6 13V10M3 19V12m18 7V3']],
     ])

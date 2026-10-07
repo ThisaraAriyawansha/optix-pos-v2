@@ -6,7 +6,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Check Out: :name', ['name' => $worker->name]),
-        'crumbs' => [__('Labour') => route('labour'), __('Attendance') => route('attendance'), __('Check Out') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('Check In / Check Out') => route('attendance'), __('Check Out') => null],
         'subtitle' => __('Enter what was made, loaded or dispatched today'),
     ])
 

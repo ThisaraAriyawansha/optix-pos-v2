@@ -23,6 +23,7 @@ class UserRoleController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:user_roles,name'],
+            'is_employee' => ['required', 'boolean'],
         ]);
 
         UserRole::create($validated);
@@ -39,6 +40,7 @@ class UserRoleController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:user_roles,name,' . $role->id],
+            'is_employee' => ['required', 'boolean'],
         ]);
 
         $role->update($validated);

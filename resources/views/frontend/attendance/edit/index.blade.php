@@ -5,7 +5,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Correct Attendance'),
-        'crumbs' => [__('Attendance') => route('attendance.board'), __('History') => route('attendance.report'), __('Edit') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('History') => route('attendance.report'), __('Edit') => null],
         'subtitle' => $attendance->attendable->name.' · '.AttendanceClock::roleOf($attendance->attendable),
     ])
 

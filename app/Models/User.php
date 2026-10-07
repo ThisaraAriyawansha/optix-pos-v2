@@ -37,8 +37,12 @@ class User extends Authenticatable
 
     protected static function booted(): void
     {
-        static::creating(function (User $user) {
-            $user->employee_code = EmployeeCode::normalize($user->employee_code) ?? EmployeeCode::next();
+        // Only people whose role is marked "employee" carry an Employee ID; they always have
+        // one, including someone moved from an owner role.
+        static::saving(function (User $user) {
+            $user->employee_code = UserRole::isEmployeeRole($user->role_id)
+                ? EmployeeCode::normalize($user->employee_code) ?? EmployeeCode::next()
+                : null;
         });
     }
 
@@ -65,12 +69,18 @@ class User extends Authenticatable
         return $this->morphMany(Attendance::class, 'attendable');
     }
 
-    /** Active non-admin staff. Admins and super admins never check in or out. */
+    /** False when the user's role is marked as not an employee (e.g. owners). */
+    public function isEmployee(): bool
+    {
+        return $this->role?->is_employee ?? true;
+    }
+
+    /** Active staff in employee roles. Owners never check in or out. */
     public function scopeAttendanceStaff(Builder $query): void
     {
         $query->where('status', true)
             ->where(fn ($query) => $query->whereNull('role_id')
-                ->orWhereHas('role', fn ($role) => $role->whereNotIn('name', UserRole::ADMIN_ROLES)));
+                ->orWhereHas('role', fn ($role) => $role->where('is_employee', true)));
     }
 
     /** Staff who are ticked to check in and out. */

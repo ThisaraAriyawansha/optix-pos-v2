@@ -5,7 +5,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Salary'),
-        'crumbs' => [__('Labour') => route('labour'), __('Salary') => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Salary') => null],
         'subtitle' => __('Unpaid balances and payment history'),
         'actions' => [['url' => route('labour.salary.create'), 'label' => __('Pay Salary'), 'primary' => true]],
     ])

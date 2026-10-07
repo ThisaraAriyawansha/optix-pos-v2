@@ -6,7 +6,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Workers'),
-        'crumbs' => [__('Labour') => route('labour'), __('Workers') => null],
+        'crumbs' => [__('Workers') => route('labour'), __('All Workers') => null],
         'subtitle' => trans_choice(':count worker|:count workers', $workers->count(), ['count' => $workers->count()]),
         'actions' => [['url' => route('labour.workers.create'), 'label' => __('Add Worker'), 'primary' => true]],
     ])

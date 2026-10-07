@@ -6,7 +6,7 @@
     @php $day = \Illuminate\Support\Carbon::parse($date); @endphp
     @include('frontend.componenet.pagehero', [
         'title' => __('Daily Work'),
-        'crumbs' => [__('Labour') => route('labour'), __('Daily Work') => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Daily Work') => null],
         'subtitle' => $day->translatedFormat('l, d F Y'),
         'actions' => [['url' => route('labour.work.create', ['date' => $date]), 'label' => __('Enter Work'), 'primary' => true]],
     ])

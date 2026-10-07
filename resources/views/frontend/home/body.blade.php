@@ -103,16 +103,42 @@
                 </span>
             </a>
 
-            {{-- Attendance, Daily Work & Salary --}}
+            {{-- Workers (labour registration) --}}
             <a href="{{ route('labour') }}" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-5 8l2 2 4-4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                </div>
+                <span class="flex flex-col items-center gap-0.5">
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Workers') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Register labourers') }}</span>
+                </span>
+            </a>
+
+            {{-- Attendance --}}
+            <a href="{{ route('attendance.menu') }}" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
                     <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Attendance') }}</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Work & salary') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Check in & check out') }}</span>
+                </span>
+            </a>
+
+            {{-- Salary & daily work --}}
+            <a href="{{ route('salary') }}" class="group relative flex flex-col items-center justify-center gap-3 h-32 sm:h-36 lg:h-40 rounded-2xl bg-surface shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200 border border-subtle">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface-alt flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <span class="flex flex-col items-center gap-0.5">
+                    <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Salary & Work') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Daily work & pay wages') }}</span>
                 </span>
             </a>
 

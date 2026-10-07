@@ -5,7 +5,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Production Report'),
-        'crumbs' => [__('Labour') => route('labour'), __('Production') => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Production') => null],
         'subtitle' => __('Units produced vs units dispatched (loaded), from daily work entries'),
         'actions' => [['url' => route('help').'#stock', 'label' => __('Help'), 'icon' => \App\Support\Help::ICON]],
     ])

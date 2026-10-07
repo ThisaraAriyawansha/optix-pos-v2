@@ -5,7 +5,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Who Checks In'),
-        'crumbs' => [__('Labour') => route('labour'), __('Attendance') => route('attendance.board'), __('Who Checks In') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('Who Checks In') => null],
         'subtitle' => __('Tick the labourers and staff who check in and out. Admins and super admins are not listed.'),
     ])
 

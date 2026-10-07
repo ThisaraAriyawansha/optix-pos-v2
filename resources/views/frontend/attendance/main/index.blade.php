@@ -13,7 +13,7 @@
     @endphp
     @include('frontend.componenet.pagehero', [
         'title' => __('Check In / Check Out'),
-        'crumbs' => [__('Labour') => route('labour'), __('Attendance') => null],
+        'crumbs' => [__('Attendance') => route('attendance.menu'), __('Check In / Check Out') => null],
         'subtitle' => now()->translatedFormat('l, d F Y'),
         'actions' => $actions,
     ])

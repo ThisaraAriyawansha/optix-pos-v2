@@ -5,7 +5,7 @@
 @section('content')
     @include('frontend.componenet.pagehero', [
         'title' => __('Payslip :code', ['code' => $payment->payment_code]),
-        'crumbs' => [__('Labour') => route('labour'), __('Salary') => route('labour.salary'), $payment->payment_code => null],
+        'crumbs' => [__('Salary & Work') => route('salary'), __('Salary') => route('labour.salary'), $payment->payment_code => null],
     ])
 
     <main class="px-5 pt-5 pb-28 max-w-3xl mx-auto print:p-0 print:max-w-none">

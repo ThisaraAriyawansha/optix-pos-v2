@@ -249,7 +249,9 @@ class QuarryProductionAndSalaryTest extends TestCase
         $entry = WorkEntry::firstOrFail();
 
         foreach ([
-            route('home'), route('labour'), route('labour.workers'), route('labour.workers.create'),
+            route('home'), route('labour'), route('salary'), route('attendance.menu'),
+            route('users.create'), route('users.edit', $this->admin), route('users.manage'),
+            route('labour.workers'), route('labour.workers.create'),
             route('labour.workers.edit', $worker), route('labour.work'), route('labour.work.create'),
             route('labour.work.edit', $entry), route('labour.salary'), route('labour.salary.create', ['worker' => $worker->id]),
             route('labour.production'), route('products'), route('products.create'), route('products.edit', $product),
@@ -260,5 +262,50 @@ class QuarryProductionAndSalaryTest extends TestCase
 
         // Monthly staff: payday pre-fills the monthly salary.
         $this->get(route('labour.salary.create', ['worker' => $worker->id]))->assertSee('60000');
+    }
+
+    public function test_owners_have_no_employee_id(): void
+    {
+        $adminRole = UserRole::create(['name' => 'Admin']);
+
+        $this->assertNull($this->admin->fresh()->employee_code);
+        $this->assertNotNull($this->cashier->fresh()->employee_code);
+
+        // Even a typed-in ID is dropped for an owner.
+        $owner = User::factory()->create(['role_id' => $adminRole->id, 'employee_code' => 'EMP-0099']);
+        $this->assertNull($owner->employee_code);
+
+        // Promoted to owner: ID removed. Moved back to staff: a new ID is given.
+        $this->cashier->update(['role_id' => $adminRole->id]);
+        $this->assertNull($this->cashier->fresh()->employee_code);
+
+        $this->cashier->update(['role_id' => UserRole::where('name', 'Cashier')->value('id')]);
+        $this->assertMatchesRegularExpression('/^EMP-\d{4}$/', $this->cashier->fresh()->employee_code);
+    }
+
+    public function test_role_form_asks_if_role_is_an_employee(): void
+    {
+        $this->actingAs($this->admin)->get(route('roles.create'))->assertOk()->assertSee('name="is_employee"', false);
+
+        $this->post(route('roles.store'), ['name' => 'Partner', 'is_employee' => 0])->assertRedirect(route('roles.manage'));
+        $partnerRole = UserRole::where('name', 'Partner')->firstOrFail();
+        $this->assertFalse($partnerRole->is_employee);
+
+        $partner = User::factory()->create(['role_id' => $partnerRole->id]);
+        $this->assertNull($partner->employee_code);
+        $this->assertFalse(User::attendanceStaff()->whereKey($partner->id)->exists());
+
+        // Answer changed to "employee": everyone in the role gets an ID.
+        $this->put(route('roles.update', $partnerRole), ['name' => 'Partner', 'is_employee' => 1])->assertRedirect(route('roles.manage'));
+        $this->assertMatchesRegularExpression('/^EMP-\d{4}$/', $partner->fresh()->employee_code);
+        $this->assertTrue(User::attendanceStaff()->whereKey($partner->id)->exists());
+
+        // And back to "owner": the ID goes away.
+        $this->put(route('roles.update', $partnerRole), ['name' => 'Partner', 'is_employee' => 0]);
+        $this->assertNull($partner->fresh()->employee_code);
+
+        $this->post(route('roles.store'), ['name' => 'Driver'])->assertSessionHasErrors('is_employee');
+        $this->get(route('roles.manage'))->assertOk()->assertSee('No, Owner');
+        $this->get(route('roles.edit', $partnerRole))->assertOk();
     }
 }

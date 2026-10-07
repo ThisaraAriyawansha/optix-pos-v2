@@ -15,7 +15,41 @@ use Illuminate\Support\Carbon;
 
 class LabourController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Workers menu: register labourers and look after their details.
+     */
+    public function index()
+    {
+        $stats = [
+            'active' => Worker::where('is_active', true)->count(),
+            'inactive' => Worker::where('is_active', false)->count(),
+        ];
+
+        return view('frontend.labour.main.index', compact('stats'));
+    }
+
+    /**
+     * Attendance menu: check in / check out, and for admins the board, history and who checks in.
+     */
+    public function attendance()
+    {
+        $today = now()->toDateString();
+
+        $stats = [
+            'working_now' => Attendance::open()->whereDate('work_date', $today)->count(),
+            'came_today' => Attendance::whereDate('work_date', $today)
+                ->get(['attendable_type', 'attendable_id'])
+                ->unique(fn (Attendance $shift) => $shift->attendable_type.':'.$shift->attendable_id)
+                ->count(),
+        ];
+
+        return view('frontend.attendance.menu.index', compact('stats'));
+    }
+
+    /**
+     * Salary & work menu: the day's work sheet, paying wages and the production report.
+     */
+    public function salary()
     {
         $today = now()->toDateString();
         $monthRange = [now()->startOfMonth()->toDateString(), now()->endOfMonth()->toDateString()];
@@ -26,12 +60,11 @@ class LabourController extends Controller
             'earned_today' => (float) WorkEntry::whereDate('work_date', $today)->sum('total_earnings'),
             'unpaid' => (float) WorkEntry::whereNull('salary_payment_id')->sum('total_earnings'),
             'paid_month' => (float) SalaryPayment::whereBetween('paid_on', $monthRange)->sum('net_amount'),
-            'checked_in' => Attendance::open()->whereDate('work_date', $today)->count(),
         ];
 
         $todayTotals = $this->productTotals($today, $today);
 
-        return view('frontend.labour.main.index', compact('stats', 'todayTotals'));
+        return view('frontend.labour.salary.menu.index', compact('stats', 'todayTotals'));
     }
 
     /**

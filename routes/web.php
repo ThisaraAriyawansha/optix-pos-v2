@@ -137,8 +137,12 @@ Route::middleware('auth')->group(function () {
 
 // Labour, Attendance & Salary
 Route::middleware('auth')->group(function () {
+    // Three separate menus: Workers (registration), Attendance, Salary & Work
     Route::get('/labour', [LabourController::class, 'index'])->name('labour');
-    Route::get('/labour/production', [LabourController::class, 'production'])->name('labour.production');
+    Route::get('/salary', [LabourController::class, 'salary'])->name('salary');
+    Route::get('/attendance/menu', [LabourController::class, 'attendance'])->name('attendance.menu');
+
+    Route::get('/labour/production',[LabourController::class, 'production'])->name('labour.production');
 
     // Workers
     Route::get('/labour/workers', [WorkerController::class, 'index'])->name('labour.workers');

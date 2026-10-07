@@ -6,13 +6,11 @@
     "Log out of OptiX POS?": "OptiX POS වෙතින් ඉවත් වන්නද?",
     "You'll need to sign in again to continue.": "ඉදිරියට යාමට ඔබට නැවත පිවිසීමට සිදුවේ.",
     "Cancel": "අවලංගු කරන්න",
-
     "Back": "ආපසු",
     "Scan": "ස්කෑන්",
     "Home": "මුල් පිටුව",
     "Reports": "වාර්තා",
     "Sale": "විකුණුම",
-
     "Main Menu": "ප්‍රධාන මෙනුව",
     "Tap to open": "විවෘත කිරීමට තට්ටු කරන්න",
     "New Sale": "නව විකුණුමක්",
@@ -40,7 +38,6 @@
     "Manage locations": "ස්ථාන කළමනාකරණය",
     "Settings": "සැකසුම්",
     "App preferences": "යෙදුම් මනාප",
-
     "Smart, fast and reliable — your all-in-one POS solution built for modern businesses.": "ස්මාර්ට්, වේගවත් සහ විශ්වසනීය — නවීන ව්‍යාපාර සඳහා නිර්මාණය කළ සියල්ල එකම තැනක ඇති POS විසඳුම.",
     "Welcome Back": "නැවත සාදරයෙන් පිළිගනිමු",
     "Sign in to access your account": "ඔබගේ ගිණුමට පිවිසීමට ලොග් වන්න",
@@ -53,7 +50,6 @@
     "Signing In...": "පිවිසෙමින්...",
     "All Rights Reserved": "සියලු හිමිකම් ඇවිරිණි",
     "These credentials do not match our records.": "මෙම පිවිසුම් තොරතුරු අපගේ වාර්තා සමඟ නොගැළපේ.",
-
     "Active": "සක්‍රීය",
     "Inactive": "අක්‍රීය",
     "Status": "තත්ත්වය",
@@ -76,7 +72,6 @@
     "Select a branch": "ශාඛාවක් තෝරන්න",
     "e.g. 0771234567": "උදා: 0771234567",
     "e.g. No. 12, Galle Road, Colombo 03": "උදා: අංක 12, ගාලු පාර, කොළඹ 03",
-
     "Branch List": "ශාඛා ලැයිස්තුව",
     "Add Branch": "ශාඛාවක් එක් කරන්න",
     "Edit Branch": "ශාඛාව සංස්කරණය",
@@ -92,7 +87,6 @@
     "Short note about this branch (optional)": "මෙම ශාඛාව ගැන කෙටි සටහනක් (අත්‍යවශ්‍ය නොවේ)",
     "Branch added successfully.": "ශාඛාව සාර්ථකව එක් කරන ලදී.",
     "Branch updated successfully.": "ශාඛාව සාර්ථකව යාවත්කාලීන කරන ලදී.",
-
     "Customer List": "පාරිභෝගික ලැයිස්තුව",
     "Add Customer": "පාරිභෝගිකයෙක් එක් කරන්න",
     "Edit Customer": "පාරිභෝගිකයා සංස්කරණය",
@@ -105,7 +99,6 @@
     "e.g. John Silva": "උදා: ජෝන් සිල්වා",
     "Customer added successfully.": "පාරිභෝගිකයා සාර්ථකව එක් කරන ලදී.",
     "Customer updated successfully.": "පාරිභෝගිකයා සාර්ථකව යාවත්කාලීන කරන ලදී.",
-
     "Supplier List": "සැපයුම්කරු ලැයිස්තුව",
     "Add Supplier": "සැපයුම්කරුවෙක් එක් කරන්න",
     "Edit Supplier": "සැපයුම්කරු සංස්කරණය",
@@ -118,7 +111,6 @@
     "e.g. 991234567V": "උදා: 991234567V",
     "Supplier added successfully.": "සැපයුම්කරු සාර්ථකව එක් කරන ලදී.",
     "Supplier updated successfully.": "සැපයුම්කරු සාර්ථකව යාවත්කාලීන කරන ලදී.",
-
     "Manage Users": "පරිශීලකයින් කළමනාකරණය",
     "Add User": "පරිශීලකයෙක් එක් කරන්න",
     "Edit User": "පරිශීලකයා සංස්කරණය",
@@ -144,7 +136,6 @@
     "e.g. nimal@optix.com": "උදා: nimal@optix.com",
     "User added successfully.": "පරිශීලකයා සාර්ථකව එක් කරන ලදී.",
     "User updated successfully.": "පරිශීලකයා සාර්ථකව යාවත්කාලීන කරන ලදී.",
-
     "Manage Roles": "භූමිකා කළමනාකරණය",
     "View & add roles": "භූමිකා බලන්න සහ එක් කරන්න",
     "Add User Role": "පරිශීලක භූමිකාවක් එක් කරන්න",
@@ -158,10 +149,8 @@
     "e.g. Cashier, Manager, Admin": "උදා: මුදල් අයකැමි, කළමනාකරු, පරිපාලක",
     "User role added successfully.": "පරිශීලක භූමිකාව සාර්ථකව එක් කරන ලදී.",
     "User role updated successfully.": "පරිශීලක භූමිකාව සාර්ථකව යාවත්කාලීන කරන ලදී.",
-
     ":name is now active.": ":name දැන් සක්‍රීයයි.",
     ":name is now inactive.": ":name දැන් අක්‍රීයයි.",
-
     "Manage Profile": "පැතිකඩ කළමනාකරණය",
     "Update your personal details": "ඔබගේ පුද්ගලික තොරතුරු යාවත්කාලීන කරන්න",
     "Profile updated successfully.": "පැතිකඩ සාර්ථකව යාවත්කාලීන කරන ලදී.",
@@ -169,7 +158,6 @@
     "Current Password": "වත්මන් මුරපදය",
     "Leave blank to keep your current password.": "ඔබගේ වත්මන් මුරපදය තබා ගැනීමට හිස්ව තබන්න.",
     "Required to set a new password": "නව මුරපදයක් සැකසීමට අවශ්‍යයි",
-
     "This Month": "මෙම මාසය",
     "Today": "අද",
     "This Week": "මෙම සතිය",
@@ -271,7 +259,6 @@
     "Expense type updated successfully.": "වියදම් වර්ගය සාර්ථකව යාවත්කාලීන කරන ලදී.",
     "Expense type deleted.": "වියදම් වර්ගය මකා දමන ලදී.",
     ":name has recorded expenses. Deactivate it instead.": ":name යටතේ වියදම් සටහන් වී ඇත. ඒ වෙනුවට එය අක්‍රීය කරන්න.",
-
     "Shop Rent": "කඩ කුලිය",
     "Monthly rent for the shop premises": "කඩ පරිශ්‍රය සඳහා මාසික කුලිය",
     "Electricity": "විදුලිය",
@@ -521,7 +508,6 @@
     "Product Code": "භාණ්ඩ කේතය",
     "Shared with system users. Leave as is to use the next free ID.": "පද්ධති පරිශීලකයන් සමඟ එකම අංක පෙළ. ඊළඟ නිදහස් අංකය භාවිතයට එලෙසම තබන්න.",
     "Shared with labourers. Leave as is to use the next free ID.": "කම්කරුවන් සමඟ එකම අංක පෙළ. ඊළඟ නිදහස් අංකය භාවිතයට එලෙසම තබන්න.",
-
     "Check In / Check Out": "පැමිණීම / පිටවීම",
     "Check In / Out": "පැමිණීම / පිටවීම",
     "Check In": "පැමිණීම සටහන් කරන්න",
@@ -646,5 +632,43 @@
     "When a labourer leaves, press \"Check Out\". Ask what they made, sorted, loaded or dispatched and type how many.": "කම්කරුවෙකු පිටවන විට \"පිටවීම සටහන් කරන්න\" ඔබන්න. නිෂ්පාදනය, වර්ග කිරීම, පැටවීම හෝ යැවීම කළ ප්‍රමාණය අසා ඇතුළත් කරන්න.",
     "Press \"Check Out & Save Work\". Their work for the day is saved too.": "\"පිටවී වැඩ සුරකින්න\" ඔබන්න. දවසේ වැඩද සුරැකේ.",
     "With a fingerprint machine, people just scan their finger: the first scan checks in, the next checks out.": "ඇඟිලි සලකුණු යන්ත්‍රයක් ඇත්නම් ඇඟිල්ල ස්කෑන් කළ යුතුය: පළමුවැන්න පැමිණීම, ඊළඟ එක පිටවීම.",
-    "Admins: \"Attendance Board\" shows who is working right now. \"Who Checks In\" lets you tick who uses attendance.": "පරිපාලකයින්: \"පැමිණීම් පුවරුව\" මේ මොහොතේ වැඩ කරන අය පෙන්වයි. \"පැමිණීම සටහන් කරන අය\" තුළ කවුරුන්ද යන්න සලකුණු කළ හැක."
+    "Admins: \"Attendance Board\" shows who is working right now. \"Who Checks In\" lets you tick who uses attendance.": "පරිපාලකයින්: \"පැමිණීම් පුවරුව\" මේ මොහොතේ වැඩ කරන අය පෙන්වයි. \"පැමිණීම සටහන් කරන අය\" තුළ කවුරුන්ද යන්න සලකුණු කළ හැක.",
+    "Register labourers and keep their details": "සේවකයින් ලියාපදිංචි කර ඔවුන්ගේ විස්තර තබා ගන්න",
+    "Register New Worker": "නව සේවකයෙකු ලියාපදිංචි කරන්න",
+    "Add a new labourer": "නව කම්කරුවෙකු එක් කරන්න",
+    "All Workers": "සියලු සේවකයින්",
+    "View & edit workers": "සේවකයින් බලන්න සහ සංස්කරණය කරන්න",
+    "Active Workers": "සක්‍රිය සේවකයින්",
+    "Inactive Workers": "අක්‍රිය සේවකයින්",
+    "Every worker gets an Employee ID (EMP-0001…) automatically. Owners do not need one.": "සෑම සේවකයෙකුටම සේවක අංකයක් (EMP-0001…) ස්වයංක්‍රීයව ලැබේ. හිමිකරුවන්ට එය අවශ්‍ය නැත.",
+    "Mark who came and who left": "පැමිණි අය සහ පිටව ගිය අය සටහන් කරන්න",
+    "Who is working now": "දැන් වැඩ කරන්නේ කවුද",
+    "Days & hours worked": "වැඩ කළ දින සහ පැය",
+    "Choose people & fingerprint": "පුද්ගලයින් සහ ඇඟිලි සලකුණ තෝරන්න",
+    "Came Today": "අද පැමිණි අය",
+    "Salary & Work": "වැටුප් සහ වැඩ",
+    "What each worker did today": "අද එක් එක් සේවකයා කළ වැඩ",
+    "Pay a worker & print payslip": "සේවකයෙකුට ගෙවා වැටුප් පත්‍රිකාව මුද්‍රණය කරන්න",
+    "Balances & Payments": "ශේෂ සහ ගෙවීම්",
+    "Who is owed & past payslips": "ගෙවිය යුතු අය සහ පැරණි වැටුප් පත්‍රිකා",
+    "Daily Work Sheet": "දෛනික වැඩ පත්‍රිකාව",
+    "See & fix past days": "පසුගිය දින බලන්න සහ නිවැරදි කරන්න",
+    "Pay for each kind of work": "එක් එක් වැඩ වර්ගයට ගෙවීම",
+    "Worked Today": "අද වැඩ කළ අය",
+    "Register labourers": "කම්කරුවන් ලියාපදිංචි කිරීම",
+    "Check in & check out": "පැමිණීම සහ පිටවීම",
+    "Daily work & pay wages": "දෛනික වැඩ සහ වැටුප් ගෙවීම",
+    "Owner": "හිමිකරු",
+    "Owners (Super Admin / Admin) do not get an Employee ID and do not check in or out.": "හිමිකරුවන්ට (Super Admin / Admin) සේවක අංකයක් නොලැබෙන අතර පැමිණීම / පිටවීම සටහන් නොකරයි.",
+    "Add": "එක් කරන්න",
+    "Are people in this role employees?": "මෙම භූමිකාවේ අය සේවකයින්ද?",
+    "Yes, Employee": "ඔව්, සේවකයෙක්",
+    "No, Owner": "නැත, හිමිකරු",
+    "Gets an Employee ID, checks in / out and can be paid": "සේවක අංකයක් ලැබේ, පැමිණීම / පිටවීම සටහන් කරයි, වැටුප් ගෙවිය හැක",
+    "No Employee ID, no check in / out": "සේවක අංකයක් නැත, පැමිණීම / පිටවීම සටහන් නොකරයි",
+    "e.g. Cashier, Manager, Driver": "උදා: මුදල් අයකැමි, කළමනාකරු, රියදුරු",
+    "e.g. Owner, Partner, Super Admin": "උදා: හිමිකරු, හවුල්කරු, Super Admin",
+    "Changing this gives or removes the Employee ID of everyone in this role.": "මෙය වෙනස් කිරීමෙන් මෙම භූමිකාවේ සියලු දෙනාගේ සේවක අංකය ලබා දේ හෝ ඉවත් වේ.",
+    "Employee?": "සේවකයෙක්ද?",
+    "This role is not an employee role, so no Employee ID is needed and they do not check in or out.": "මෙය සේවක භූමිකාවක් නොවන නිසා සේවක අංකයක් අවශ්‍ය නැත, පැමිණීම / පිටවීම සටහන් නොකරයි."
 }
