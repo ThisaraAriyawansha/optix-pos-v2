@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Models\Worker;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Product costs, commissions, selling prices and pay rates are admin-only.
+        Gate::define('manage-pricing', fn (User $user) => $user->isAdmin());
+
+        // The live attendance board, attendance history, corrections and who is tracked.
+        Gate::define('manage-attendance', fn (User $user) => $user->isAdmin());
+
+        // Stored in attendances.attendable_type instead of the class names.
+        Relation::morphMap([
+            'worker' => Worker::class,
+            'user' => User::class,
+        ]);
     }
 }

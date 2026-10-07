@@ -1,5 +1,5 @@
 {{-- ────────────────────────── BOTTOM NAV ────────────────────────── --}}
-<nav class="fixed bottom-2 sm:bottom-3 inset-x-0 z-50 flex justify-center px-2 sm:px-3">
+<nav class="fixed bottom-2 sm:bottom-3 inset-x-0 z-50 flex justify-center px-2 sm:px-3 print:hidden">
     <div class="grid grid-cols-5 items-center px-1.5 sm:px-3 py-1 sm:py-1.5 rounded-[24px] sm:rounded-[28px] w-full max-w-md
                 bg-white/20 dark:bg-[#112236]/60 backdrop-blur-xl backdrop-saturate-150
                 border border-white/40 dark:border-[#1c3350]

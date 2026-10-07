@@ -1,0 +1,42 @@
+{{-- Page heading with breadcrumb. Expects $title; optional $crumbs ([label => url]), $subtitle, $actions ([['url','label','icon','primary']]). --}}
+<section class="px-5 pt-6 max-w-6xl mx-auto print:hidden">
+
+    {{-- breadcrumb --}}
+    <nav class="flex items-center gap-1.5 text-xs font-sans text-gray-400 dark:text-gray-500">
+        <a href="{{ route('home') }}" class="hover:text-brand transition-colors">{{ __('Home') }}</a>
+        @foreach ($crumbs ?? [] as $crumbLabel => $crumbUrl)
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+            @if ($crumbUrl)
+                <a href="{{ $crumbUrl }}" class="hover:text-brand transition-colors">{{ $crumbLabel }}</a>
+            @else
+                <span class="text-gray-700 dark:text-gray-300">{{ $crumbLabel }}</span>
+            @endif
+        @endforeach
+    </nav>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 mt-3">
+        <div>
+            <h1 class="font-heading font-semibold text-gray-900 dark:text-white text-xl tracking-tight">{{ $title }}</h1>
+            @if (! empty($subtitle))
+                <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-0.5">{{ $subtitle }}</p>
+            @endif
+        </div>
+
+        @if (! empty($actions))
+            <div class="flex flex-wrap items-center gap-2">
+                @foreach ($actions as $action)
+                    <a href="{{ $action['url'] }}"
+                       class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-transform whitespace-nowrap
+                              {{ ($action['primary'] ?? false) ? 'bg-brand text-white' : 'bg-surface border border-gray-300 dark:border-[#2a4a70] text-gray-700 dark:text-gray-200' }}">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="{{ $action['icon'] ?? 'M12 4v16m8-8H4' }}"/>
+                        </svg>
+                        {{ $action['label'] }}
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+</section>

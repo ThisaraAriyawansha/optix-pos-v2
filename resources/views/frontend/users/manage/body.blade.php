@@ -27,6 +27,7 @@
                 <table class="w-full text-sm font-sans">
                     <thead>
                         <tr class="bg-surface-alt text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-300 dark:border-[#2a4a70]">
+                            <th class="px-4 py-3 font-medium">{{ __('Employee ID') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Name') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Email') }}</th>
                             <th class="px-4 py-3 font-medium">{{ __('Phone') }}</th>
@@ -41,6 +42,7 @@
                         @foreach ($users as $user)
                             <tr onclick="window.location='{{ route('users.edit', $user) }}'"
                                 class="cursor-pointer hover:bg-surface-alt transition-colors">
+                                <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap font-mono text-xs">{{ $user->employee_code ?? '—' }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $user->name }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $user->email }}</td>
                                 <td class="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{{ $user->phone_number ?? '—' }}</td>

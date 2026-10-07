@@ -12,6 +12,16 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\RawMaterialController;
+use App\Http\Controllers\WorkActivityController;
+use App\Http\Controllers\LabourController;
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\WorkEntryController;
+use App\Http\Controllers\SalaryPaymentController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceAdminController;
+use App\Http\Controllers\AttendanceDeviceController;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 
 
 
@@ -95,6 +105,96 @@ Route::middleware('auth')->group(function () {
     Route::patch('/expenses/categories/{category}/toggle-status', [ExpenseCategoryController::class, 'toggleStatus'])->name('expenses.categories.toggleStatus');
     Route::delete('/expenses/categories/{category}', [ExpenseCategoryController::class, 'destroy'])->name('expenses.categories.destroy');
 });
+
+
+// Products Page — everyone sees products and selling prices; costs and pricing are admin-only
+Route::middleware('auth')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
+
+    Route::middleware('can:manage-pricing')->group(function () {
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->whereNumber('product')->name('products.edit');
+        Route::put('/products/{product}', [ProductController::class, 'update'])->whereNumber('product')->name('products.update');
+        Route::patch('/products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])->whereNumber('product')->name('products.toggleStatus');
+
+        // Raw Materials
+        Route::get('/products/materials', [RawMaterialController::class, 'index'])->name('products.materials');
+        Route::post('/products/materials', [RawMaterialController::class, 'store'])->name('products.materials.store');
+        Route::get('/products/materials/{material}/edit', [RawMaterialController::class, 'edit'])->name('products.materials.edit');
+        Route::put('/products/materials/{material}', [RawMaterialController::class, 'update'])->name('products.materials.update');
+        Route::patch('/products/materials/{material}/toggle-status', [RawMaterialController::class, 'toggleStatus'])->name('products.materials.toggleStatus');
+
+        // Work Activities & Rates
+        Route::get('/products/activities', [WorkActivityController::class, 'index'])->name('products.activities');
+        Route::post('/products/activities', [WorkActivityController::class, 'store'])->name('products.activities.store');
+        Route::get('/products/activities/{activity}/edit', [WorkActivityController::class, 'edit'])->name('products.activities.edit');
+        Route::put('/products/activities/{activity}', [WorkActivityController::class, 'update'])->name('products.activities.update');
+        Route::patch('/products/activities/{activity}/toggle-status', [WorkActivityController::class, 'toggleStatus'])->name('products.activities.toggleStatus');
+    });
+});
+
+
+// Labour, Attendance & Salary
+Route::middleware('auth')->group(function () {
+    Route::get('/labour', [LabourController::class, 'index'])->name('labour');
+    Route::get('/labour/production', [LabourController::class, 'production'])->name('labour.production');
+
+    // Workers
+    Route::get('/labour/workers', [WorkerController::class, 'index'])->name('labour.workers');
+    Route::get('/labour/workers/create', [WorkerController::class, 'create'])->name('labour.workers.create');
+    Route::post('/labour/workers', [WorkerController::class, 'store'])->name('labour.workers.store');
+    Route::get('/labour/workers/{worker}/edit', [WorkerController::class, 'edit'])->name('labour.workers.edit');
+    Route::put('/labour/workers/{worker}', [WorkerController::class, 'update'])->name('labour.workers.update');
+    Route::patch('/labour/workers/{worker}/toggle-status', [WorkerController::class, 'toggleStatus'])->name('labour.workers.toggleStatus');
+
+    // Daily Work Entry
+    Route::get('/labour/work', [WorkEntryController::class, 'index'])->name('labour.work');
+    Route::get('/labour/work/create', [WorkEntryController::class, 'create'])->name('labour.work.create');
+    Route::post('/labour/work', [WorkEntryController::class, 'store'])->name('labour.work.store');
+    Route::get('/labour/work/{entry}/edit', [WorkEntryController::class, 'edit'])->name('labour.work.edit');
+    Route::put('/labour/work/{entry}', [WorkEntryController::class, 'update'])->name('labour.work.update');
+    Route::delete('/labour/work/{entry}', [WorkEntryController::class, 'destroy'])->name('labour.work.destroy');
+
+    // Salary Payments
+    Route::get('/labour/salary', [SalaryPaymentController::class, 'index'])->name('labour.salary');
+    Route::get('/labour/salary/create', [SalaryPaymentController::class, 'create'])->name('labour.salary.create');
+    Route::post('/labour/salary', [SalaryPaymentController::class, 'store'])->name('labour.salary.store');
+    Route::get('/labour/salary/{payment}', [SalaryPaymentController::class, 'show'])->whereNumber('payment')->name('labour.salary.show');
+    Route::delete('/labour/salary/{payment}', [SalaryPaymentController::class, 'destroy'])->whereNumber('payment')->middleware('can:manage-pricing')->name('labour.salary.destroy');
+});
+
+
+// Attendance: check-in / check-out for labourers and staff (never admins)
+Route::middleware('auth')->group(function () {
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
+    Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkIn');
+    Route::get('/attendance/{attendance}/check-out', [AttendanceController::class, 'checkOutForm'])->whereNumber('attendance')->name('attendance.checkOut.form');
+    Route::post('/attendance/{attendance}/check-out', [AttendanceController::class, 'checkOut'])->whereNumber('attendance')->name('attendance.checkOut');
+
+    Route::middleware('can:manage-attendance')->group(function () {
+        Route::get('/attendance/board', [AttendanceAdminController::class, 'board'])->name('attendance.board');
+        Route::get('/attendance/report', [AttendanceAdminController::class, 'report'])->name('attendance.report');
+        Route::get('/attendance/people', [AttendanceAdminController::class, 'people'])->name('attendance.people');
+        Route::put('/attendance/people', [AttendanceAdminController::class, 'updatePeople'])->name('attendance.people.update');
+        Route::get('/attendance/{attendance}/edit', [AttendanceAdminController::class, 'edit'])->whereNumber('attendance')->name('attendance.edit');
+        Route::put('/attendance/{attendance}', [AttendanceAdminController::class, 'update'])->whereNumber('attendance')->name('attendance.update');
+        Route::delete('/attendance/{attendance}', [AttendanceAdminController::class, 'destroy'])->whereNumber('attendance')->name('attendance.destroy');
+    });
+});
+
+// Fingerprint devices (no login / CSRF — secured by device token or allowed serial numbers)
+Route::withoutMiddleware([ValidateCsrfToken::class])->group(function () {
+    Route::post('/attendance/device/punch', [AttendanceDeviceController::class, 'punch'])->name('attendance.device.punch');
+    Route::get('/iclock/cdata', [AttendanceDeviceController::class, 'handshake']);
+    Route::post('/iclock/cdata', [AttendanceDeviceController::class, 'receive']);
+    Route::get('/iclock/getrequest', [AttendanceDeviceController::class, 'getRequest']);
+    Route::post('/iclock/devicecmd', [AttendanceDeviceController::class, 'getRequest']);
+});
+
+
+// Help / How to use
+Route::view('/help', 'frontend.help.index')->middleware('auth')->name('help');
 
 
 // Settings Page

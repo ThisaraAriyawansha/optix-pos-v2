@@ -6,6 +6,17 @@
         @method('PUT')
 
         <div>
+            <label for="employee_code" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1.5">
+                {{ __('Employee ID') }}
+            </label>
+            <input type="text" name="employee_code" id="employee_code" value="{{ old('employee_code', $user->employee_code) }}" maxlength="20"
+                   class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans uppercase text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
+            @error('employee_code')
+                <p class="text-xs text-accent mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1.5">
                 {{ __('Name') }} <span class="text-accent">*</span>
             </label>
