@@ -10,6 +10,7 @@ use App\Models\Worker;
 use App\Support\AttendanceClock;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -141,9 +142,16 @@ class AttendanceAdminController extends Controller
             ->sortBy(fn ($row) => [$row['type'] === 'worker' ? 0 : 1, $row['person']->name])
             ->values();
 
-        $log = $shifts->when($person, fn ($shifts) => $shifts->filter(
+        $logShifts = $shifts->when($person, fn ($shifts) => $shifts->filter(
             fn (Attendance $shift) => $shift->attendable_type.':'.$shift->attendable_id === $person
-        ))->take(500)->values();
+        ))->values();
+
+        // The summary needs every shift, so only the log below it is paged.
+        $page = LengthAwarePaginator::resolveCurrentPage();
+        $log = (new LengthAwarePaginator($logShifts->forPage($page, 50)->values(), $logShifts->count(), 50, $page, [
+            'path' => $request->url(),
+            'query' => $request->query(),
+        ]))->fragment('log');
 
         return view('frontend.attendance.report.index', compact('from', 'to', 'branchId', 'type', 'person', 'branches', 'summary', 'log'));
     }

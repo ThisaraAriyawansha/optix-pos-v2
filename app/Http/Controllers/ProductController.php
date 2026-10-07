@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
+        $canManage = $request->user()->can('manage-pricing');
 
         $products = Product::query()
             ->when($search, function ($query, $search) {
@@ -22,11 +23,12 @@ class ProductController extends Controller
                         ->orWhere('code', 'like', "%{$search}%");
                 });
             })
+            // Non-admins only see the active price list.
+            ->when(! $canManage, fn ($query) => $query->where('is_active', true))
             ->orderByDesc('is_active')
             ->orderBy('name')
-            ->get();
-
-        $canManage = $request->user()->can('manage-pricing');
+            ->paginate(24)
+            ->withQueryString();
 
         return view('frontend.product.main.index', compact('products', 'search', 'canManage'));
     }

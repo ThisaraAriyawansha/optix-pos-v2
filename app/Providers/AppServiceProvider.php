@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,5 +35,8 @@ class AppServiceProvider extends ServiceProvider
             'worker' => Worker::class,
             'user' => User::class,
         ]);
+
+        // Every ->links() call renders the themed pager.
+        Paginator::defaultView('frontend.componenet.pagination');
     }
 }

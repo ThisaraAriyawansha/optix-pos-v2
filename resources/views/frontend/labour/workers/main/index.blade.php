@@ -7,7 +7,7 @@
     @include('frontend.componenet.pagehero', [
         'title' => __('Workers'),
         'crumbs' => [__('Workers') => route('labour'), __('All Workers') => null],
-        'subtitle' => trans_choice(':count worker|:count workers', $workers->count(), ['count' => $workers->count()]),
+        'subtitle' => trans_choice(':count worker|:count workers', $workers->total(), ['count' => $workers->total()]),
         'actions' => [['url' => route('labour.workers.create'), 'label' => __('Add Worker'), 'primary' => true]],
     ])
 
@@ -89,6 +89,10 @@
                     </div>
                 @endforeach
             </div>
+
+            @if ($workers->hasPages())
+                <div class="mt-4">{{ $workers->links() }}</div>
+            @endif
         @endif
     </main>
 @endsection

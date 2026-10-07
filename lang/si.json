@@ -1,4 +1,12 @@
 {
+    "Are you sure?": "ඔබට විශ්වාසද?",
+    "Notice": "දැනුම්දීම",
+    "Confirm": "තහවුරු කරන්න",
+    "OK": "හරි",
+    "Keep": "තබා ගන්න",
+    "Delete expense": "වියදම මකන්න",
+    "Delete type": "වර්ගය මකන්න",
+    "Delete entry": "සටහන මකන්න",
     "Welcome to": "සාදරයෙන් පිළිගනිමු",
     "Guest": "අමුත්තා",
     "Language": "භාෂාව",
@@ -670,5 +678,10 @@
     "e.g. Owner, Partner, Super Admin": "උදා: හිමිකරු, හවුල්කරු, Super Admin",
     "Changing this gives or removes the Employee ID of everyone in this role.": "මෙය වෙනස් කිරීමෙන් මෙම භූමිකාවේ සියලු දෙනාගේ සේවක අංකය ලබා දේ හෝ ඉවත් වේ.",
     "Employee?": "සේවකයෙක්ද?",
-    "This role is not an employee role, so no Employee ID is needed and they do not check in or out.": "මෙය සේවක භූමිකාවක් නොවන නිසා සේවක අංකයක් අවශ්‍ය නැත, පැමිණීම / පිටවීම සටහන් නොකරයි."
+    "This role is not an employee role, so no Employee ID is needed and they do not check in or out.": "මෙය සේවක භූමිකාවක් නොවන නිසා සේවක අංකයක් අවශ්‍ය නැත, පැමිණීම / පිටවීම සටහන් නොකරයි.",
+    "Page navigation": "පිටු සංචාලනය",
+    "Showing :from–:to of :total": ":total න් :from–:to පෙන්වයි",
+    "Previous": "පෙර",
+    "Next": "ඊළඟ",
+    "Page :current / :last": "පිටුව :current / :last"
 }

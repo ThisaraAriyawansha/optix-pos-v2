@@ -130,7 +130,8 @@
                                        class="flex-1 text-center py-2.5 rounded-xl text-sm font-semibold bg-red-600 text-white active:scale-95 transition-transform">{{ __('Check Out') }}</a>
                                 @else
                                     <form action="{{ route('attendance.checkOut', $row['open']) }}" method="POST" class="flex-1"
-                                          onsubmit="return confirm(@js(__('Check out :name now?', ['name' => $person->name])))">
+                                          data-confirm="{{ __('Check out :name now?', ['name' => $person->name]) }}"
+                                          data-confirm-title="{{ __('Check Out') }}" data-confirm-ok="{{ __('Check Out') }}" data-confirm-variant="danger">
                                         @csrf
                                         <button class="w-full py-2.5 rounded-xl text-sm font-semibold bg-red-600 text-white active:scale-95 transition-transform">{{ __('Check Out') }}</button>
                                     </form>

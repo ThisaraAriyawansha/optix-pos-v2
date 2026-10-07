@@ -26,6 +26,8 @@
 
     @include('frontend.componenet.buttomnav')
 
+    @include('frontend.componenet.confirm')
+
     <script>
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');

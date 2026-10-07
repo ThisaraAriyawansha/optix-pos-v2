@@ -29,7 +29,8 @@ class UserController extends Controller
                 });
             })
             ->latest()
-            ->get();
+            ->paginate(25)
+            ->withQueryString();
 
         return view('frontend.users.manage.index', compact('users', 'search'));
     }

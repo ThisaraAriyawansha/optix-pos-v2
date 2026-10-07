@@ -29,7 +29,8 @@ class WorkerController extends Controller
             ->when($filters['pay_type'] ?? null, fn ($query, $payType) => $query->where('pay_type', $payType))
             ->orderByDesc('is_active')
             ->orderBy('name')
-            ->get();
+            ->paginate(24)
+            ->withQueryString();
 
         $branches = Branch::orderBy('name')->get();
 

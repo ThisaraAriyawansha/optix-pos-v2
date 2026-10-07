@@ -77,7 +77,7 @@
         <p class="text-[11px] text-gray-400 dark:text-gray-500 font-sans mt-2">{{ __('All amounts are per unit. Profit = selling price − total cost − commission.') }}</p>
     @else
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            @foreach ($products->where('is_active', true) as $product)
+            @foreach ($products as $product)
                 <div class="flex flex-col rounded-2xl bg-surface border border-subtle shadow-sm p-4">
                     <p class="font-medium text-gray-900 dark:text-white tracking-tight truncate">{{ $product->name }}</p>
                     <p class="text-[11px] text-gray-400 dark:text-gray-500 font-sans">{{ $product->code }}</p>
@@ -86,5 +86,9 @@
                 </div>
             @endforeach
         </div>
+    @endif
+
+    @if ($products->hasPages())
+        <div class="mt-4">{{ $products->links() }}</div>
     @endif
 </main>

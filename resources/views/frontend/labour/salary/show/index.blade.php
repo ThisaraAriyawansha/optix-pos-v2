@@ -88,7 +88,9 @@
             <a href="{{ route('labour.salary') }}" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-gray-300 dark:border-[#2a4a70] text-gray-700 dark:text-gray-200">{{ __('Back to Salary') }}</a>
             @can('manage-pricing')
                 <form action="{{ route('labour.salary.destroy', $payment) }}" method="POST" class="ml-auto"
-                      onsubmit="return confirm(@js(__('Cancel this payment? Its work will become unpaid again.')))">
+                      data-confirm="{{ __('Cancel this payment? Its work will become unpaid again.') }}"
+                      data-confirm-title="{{ __('Cancel Payment') }}" data-confirm-ok="{{ __('Cancel Payment') }}"
+                      data-confirm-cancel="{{ __('Keep') }}" data-confirm-variant="danger">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:underline">{{ __('Cancel Payment') }}</button>

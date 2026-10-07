@@ -85,6 +85,8 @@
 
                 {{-- ── step 2: pay ── --}}
                 <form action="{{ route('labour.salary.store') }}" method="POST"
+                      data-confirm="{{ __('Pay this salary? The work will be marked as paid.') }}"
+                      data-confirm-title="{{ __('Pay salary') }}" data-confirm-ok="{{ __('Pay') }}"
                       class="lg:sticky lg:top-4 rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] p-5 space-y-4">
                     @csrf
                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
@@ -133,8 +135,7 @@
                         <input type="text" name="notes" id="notes" maxlength="1000" value="{{ old('notes') }}" placeholder="{{ __('Optional') }}" class="{{ $field }}">
                     </div>
 
-                    <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold bg-brand text-white active:scale-95 transition-transform"
-                            onclick="return confirm(@js(__('Pay this salary? The work will be marked as paid.')))">
+                    <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold bg-brand text-white active:scale-95 transition-transform">
                         {{ __('Pay & Issue Payslip') }}
                     </button>
                 </form>

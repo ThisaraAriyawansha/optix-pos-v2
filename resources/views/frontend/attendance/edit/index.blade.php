@@ -40,7 +40,8 @@
         </form>
 
         <form action="{{ route('attendance.destroy', $attendance) }}" method="POST" class="mt-3"
-              onsubmit="return confirm(@js(__('Delete this attendance record?')))">
+              data-confirm="{{ __('Delete this attendance record?') }}"
+              data-confirm-title="{{ __('Delete Record') }}" data-confirm-ok="{{ __('Delete') }}" data-confirm-variant="danger">
             @csrf
             @method('DELETE')
             <button class="w-full py-2.5 rounded-xl text-sm font-semibold text-red-600 border border-red-200 dark:border-red-900/40">{{ __('Delete Record') }}</button>

@@ -22,7 +22,8 @@ class CustomerController extends Controller
                 });
             })
             ->latest()
-            ->get();
+            ->paginate(25)
+            ->withQueryString();
 
         return view('frontend.customers.main.index', compact('customers', 'search'));
     }

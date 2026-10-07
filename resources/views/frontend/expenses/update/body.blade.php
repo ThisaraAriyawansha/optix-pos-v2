@@ -24,7 +24,8 @@
 
     {{-- delete --}}
     <form action="{{ route('expenses.destroy', $expense) }}" method="POST"
-          onsubmit="return confirm(this.dataset.confirm)" data-confirm="{{ __('Delete expense :code? This cannot be undone.', ['code' => $expense->expense_code]) }}"
+          data-confirm="{{ __('Delete expense :code? This cannot be undone.', ['code' => $expense->expense_code]) }}"
+          data-confirm-title="{{ __('Delete expense') }}" data-confirm-ok="{{ __('Delete') }}" data-confirm-variant="danger"
           class="mt-4 flex flex-wrap items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-900/10">
         @csrf
         @method('DELETE')

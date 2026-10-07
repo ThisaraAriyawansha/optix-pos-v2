@@ -127,6 +127,10 @@
                     </table>
                 </div>
             </div>
+
+            @if ($log->hasPages())
+                <div class="mt-4">{{ $log->links() }}</div>
+            @endif
         @endif
     </main>
 @endsection

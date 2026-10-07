@@ -22,7 +22,8 @@ class SupplierController extends Controller
                 });
             })
             ->latest()
-            ->get();
+            ->paginate(25)
+            ->withQueryString();
 
         return view('frontend.supplier.main.index', compact('suppliers', 'search'));
     }

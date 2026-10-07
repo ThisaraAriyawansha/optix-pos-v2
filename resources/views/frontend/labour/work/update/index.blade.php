@@ -27,7 +27,8 @@
 
         @unless ($entry->isPaid())
             <form action="{{ route('labour.work.destroy', $entry) }}" method="POST" class="mt-4"
-                  onsubmit="return confirm(@js(__('Delete this work entry?')))">
+                  data-confirm="{{ __('Delete this work entry?') }}"
+                  data-confirm-title="{{ __('Delete entry') }}" data-confirm-ok="{{ __('Delete') }}" data-confirm-variant="danger">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-sm text-red-600 dark:text-red-400 hover:underline">{{ __('Delete this entry') }}</button>
