@@ -22,6 +22,14 @@
                 <p class="text-xs text-gray-400 dark:text-gray-500 font-sans">{{ __('Paid This Month') }}</p>
                 <p class="font-heading font-semibold text-xl sm:text-2xl text-gray-900 dark:text-white tracking-tight mt-1">{{ Money::format($stats['paid_month']) }}</p>
             </div>
+            <div class="rounded-2xl bg-surface border border-subtle p-4 sm:p-5 shadow-sm">
+                <p class="text-xs text-gray-400 dark:text-gray-500 font-sans">{{ __('EPF This Month') }}</p>
+                <p class="font-heading font-semibold text-xl sm:text-2xl text-gray-900 dark:text-white tracking-tight mt-1">{{ Money::format($stats['epf_month']) }}</p>
+            </div>
+            <div class="rounded-2xl bg-surface border border-subtle p-4 sm:p-5 shadow-sm">
+                <p class="text-xs text-gray-400 dark:text-gray-500 font-sans">{{ __('ETF This Month') }}</p>
+                <p class="font-heading font-semibold text-xl sm:text-2xl text-gray-900 dark:text-white tracking-tight mt-1">{{ Money::format($stats['etf_month']) }}</p>
+            </div>
         </div>
 
         {{-- ── balances ── --}}

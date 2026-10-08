@@ -92,6 +92,43 @@
     </div>
 </div>
 
+{{-- ── EPF / ETF ── --}}
+<div class="rounded-xl border border-gray-300 dark:border-[#2a4a70] p-4 space-y-4">
+    <label class="flex items-start gap-2 cursor-pointer">
+        <input type="hidden" name="epf_enabled" value="0">
+        <input type="checkbox" name="epf_enabled" id="epf_enabled" value="1" class="rounded mt-0.5" onchange="toggleEpfFields()"
+               {{ old('epf_enabled', $worker?->epf_enabled) ? 'checked' : '' }}>
+        <span>
+            <span class="block text-sm font-medium text-gray-900 dark:text-white">{{ __('Calculate EPF / ETF') }}</span>
+            <span class="block text-[11px] text-gray-400 dark:text-gray-500">{{ __('Leave unticked for workers not registered for EPF / ETF.') }}</span>
+        </span>
+    </label>
+
+    <div id="epf-fields" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div>
+            <label for="epf_number" class="{{ $label }}">{{ __('EPF No.') }}</label>
+            <input type="text" name="epf_number" id="epf_number" maxlength="30" value="{{ old('epf_number', $worker?->epf_number) }}" class="{{ $field }}">
+            @error('epf_number') <p class="text-xs text-accent mt-1">{{ $message }}</p> @enderror
+        </div>
+        @foreach ([
+            'epf_employee_rate' => [__('EPF – employee'), 8],
+            'epf_employer_rate' => [__('EPF – employer'), 12],
+            'etf_rate' => [__('ETF – employer'), 3],
+        ] as $name => [$text, $default])
+            <div>
+                <label for="{{ $name }}" class="{{ $label }}">{{ $text }}</label>
+                <div class="relative">
+                    <input type="number" name="{{ $name }}" id="{{ $name }}" step="0.01" min="0" max="100" inputmode="decimal"
+                           value="{{ old($name, $worker ? (float) $worker->{$name} : $default) }}" class="{{ $field }} pr-8">
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-400">%</span>
+                </div>
+                @error($name) <p class="text-xs text-accent mt-1">{{ $message }}</p> @enderror
+            </div>
+        @endforeach
+        <p class="sm:col-span-4 text-[11px] text-gray-400 dark:text-gray-500 -mt-2">{{ __('The employee EPF share is taken from their pay. Employer EPF and ETF are paid by the business on top.') }}</p>
+    </div>
+</div>
+
 <div>
     <label for="address" class="{{ $label }}">{{ __('Address') }}</label>
     <input type="text" name="address" id="address" maxlength="255" value="{{ old('address', $worker?->address) }}" class="{{ $field }}">
@@ -116,4 +153,9 @@
         document.querySelectorAll('[data-pay]').forEach((el) => el.classList.toggle('hidden', el.dataset.pay !== type));
     }
     togglePayFields();
+
+    function toggleEpfFields() {
+        document.getElementById('epf-fields').classList.toggle('hidden', !document.getElementById('epf_enabled').checked);
+    }
+    toggleEpfFields();
 </script>

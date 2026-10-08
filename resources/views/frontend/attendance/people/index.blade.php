@@ -6,7 +6,7 @@
     @include('frontend.componenet.pagehero', [
         'title' => __('Who Checks In'),
         'crumbs' => [__('Attendance') => route('attendance.menu'), __('Who Checks In') => null],
-        'subtitle' => __('Tick the labourers and staff who check in and out. Admins and super admins are not listed.'),
+        'subtitle' => __('Tick the workers and staff who check in and out. Admins and super admins are not listed.'),
     ])
 
     <main class="px-5 pt-5 pb-28 max-w-6xl mx-auto">
@@ -18,7 +18,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
                 @foreach ([
-                    ['key' => 'workers', 'title' => __('Labourers'), 'people' => $workers],
+                    ['key' => 'workers', 'title' => __('Workers'), 'people' => $workers],
                     ['key' => 'users', 'title' => __('Managing Staff'), 'people' => $staff],
                 ] as $group)
                     <section class="rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] overflow-hidden" data-group="{{ $group['key'] }}">

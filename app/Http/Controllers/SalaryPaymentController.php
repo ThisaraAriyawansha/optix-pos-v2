@@ -31,9 +31,14 @@ class SalaryPaymentController extends Controller
             ->latest('id')
             ->paginate(15);
 
+        $thisMonth = SalaryPayment::whereBetween('paid_on', [now()->startOfMonth()->toDateString(), now()->endOfMonth()->toDateString()]);
+
         $stats = [
             'unpaid' => (float) $workers->sum('unpaid_total'),
-            'paid_month' => (float) SalaryPayment::whereBetween('paid_on', [now()->startOfMonth()->toDateString(), now()->endOfMonth()->toDateString()])->sum('net_amount'),
+            'paid_month' => (float) (clone $thisMonth)->sum('net_amount'),
+            // What has to be sent to the EPF / ETF funds for this month's payments.
+            'epf_month' => (float) (clone $thisMonth)->sum(DB::raw('epf_employee + epf_employer')),
+            'etf_month' => (float) (clone $thisMonth)->sum('etf'),
         ];
 
         return view('frontend.labour.salary.main.index', compact('workers', 'payments', 'stats'));
@@ -83,7 +88,9 @@ class SalaryPaymentController extends Controller
             $basic = (float) ($validated['basic_salary'] ?? 0);
             $bonus = (float) ($validated['bonus'] ?? 0);
             $deductions = (float) ($validated['deductions'] ?? 0);
-            $net = round($workEarnings + $basic + $bonus - $deductions, 2);
+            // EPF / ETF is on earnings only — bonus and allowances are left out.
+            $contributions = $worker->contributionsFor($workEarnings + $basic);
+            $net = round($workEarnings + $basic + $bonus - $deductions - $contributions['epf_employee'], 2);
 
             if ($net <= 0) {
                 throw ValidationException::withMessages([
@@ -102,6 +109,7 @@ class SalaryPaymentController extends Controller
                 'basic_salary' => $basic,
                 'bonus' => $bonus,
                 'deductions' => $deductions,
+                ...$contributions,
                 'net_amount' => $net,
                 'payment_method' => $validated['payment_method'],
                 'paid_on' => $validated['paid_on'],

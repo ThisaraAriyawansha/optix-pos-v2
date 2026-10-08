@@ -91,10 +91,21 @@ class WorkerController extends Controller
             'pay_type' => ['required', Rule::in(array_keys(Worker::PAY_TYPES))],
             'daily_rate' => ['nullable', 'required_if:pay_type,daily', 'numeric', 'min:0', 'max:9999999'],
             'monthly_salary' => ['nullable', 'required_if:pay_type,monthly', 'numeric', 'min:0', 'max:9999999999'],
+            'epf_enabled' => ['nullable', 'boolean'],
+            'epf_number' => ['nullable', 'string', 'max:30'],
+            'epf_employee_rate' => ['nullable', 'required_if_accepted:epf_enabled', 'numeric', 'min:0', 'max:100'],
+            'epf_employer_rate' => ['nullable', 'required_if_accepted:epf_enabled', 'numeric', 'min:0', 'max:100'],
+            'etf_rate' => ['nullable', 'required_if_accepted:epf_enabled', 'numeric', 'min:0', 'max:100'],
             'joined_on' => ['nullable', 'date', 'before_or_equal:today'],
             'notes' => ['nullable', 'string', 'max:1000'],
             'is_active' => ['nullable', 'boolean'],
         ]);
+
+        $validated['epf_enabled'] = $request->boolean('epf_enabled');
+        // Blank rates fall back to the standard 8% / 12% / 3%.
+        foreach (['epf_employee_rate' => 8, 'epf_employer_rate' => 12, 'etf_rate' => 3] as $rate => $default) {
+            $validated[$rate] ??= $default;
+        }
 
         // Blank on create → the model assigns the next ID; blank on edit → keep the current one.
         $validated['code'] = EmployeeCode::normalize($validated['code'] ?? null) ?? $worker?->code;

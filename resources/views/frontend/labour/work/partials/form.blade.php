@@ -1,12 +1,13 @@
-{{-- Daily work entry form. Expects $workers, $branches, $products, $activities, $rateMap, $date, $selectedWorker; optional $entry. --}}
+{{-- Daily work entry form. Expects $workers, $branches, $products, $activities, $rateMap, $date, $selectedWorker; optional $entry, $selectedBranch. --}}
 @php
     $entry = $entry ?? null;
+    $selectedBranch = $selectedBranch ?? null;
     $field = 'w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#004080]/40';
     $label = 'block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1.5';
     $card = 'rounded-2xl bg-surface border border-gray-300 dark:border-[#2a4a70] p-5 space-y-4';
 
     $currentWorker = old('worker_id', $selectedWorker);
-    $currentBranch = old('branch_id', $entry?->branch_id ?? $workers->firstWhere('id', $currentWorker)?->branch_id ?? auth()->user()?->branch_id);
+    $currentBranch = old('branch_id', $entry?->branch_id ?? $selectedBranch ?? $workers->firstWhere('id', $currentWorker)?->branch_id ?? auth()->user()?->branch_id);
     $currentAttendance = old('attendance', $entry?->attendance ?? 'present');
     $lines = old('items', $entry?->items->map(fn ($item) => [
         'product_id' => $item->product_id,
@@ -162,9 +163,13 @@
         return WORKERS[document.getElementById('worker_id').value] || null;
     }
 
+    // Opened from a branch's day sheet (or editing), the branch is where they worked that day;
+    // otherwise default to the worker's home branch. It can still be changed by hand.
+    const BRANCH_FIXED = @json(($entry || $selectedBranch) ? true : false);
+
     function workerChanged() {
         const worker = currentWorker();
-        if (worker && worker.branch_id) document.getElementById('branch_id').value = worker.branch_id;
+        if (!BRANCH_FIXED && worker && worker.branch_id) document.getElementById('branch_id').value = worker.branch_id;
         recalc();
     }
 

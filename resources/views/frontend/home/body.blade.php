@@ -112,7 +112,7 @@
                 </div>
                 <span class="flex flex-col items-center gap-0.5">
                     <span class="font-medium text-sm sm:text-[15px] tracking-tight text-gray-900 dark:text-white">{{ __('Workers') }}</span>
-                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Register labourers') }}</span>
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('Register workers') }}</span>
                 </span>
             </a>
 

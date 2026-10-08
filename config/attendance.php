@@ -25,4 +25,16 @@ return [
 
     'device_serials' => array_filter(array_map('trim', explode(',', (string) env('ATTENDANCE_DEVICE_SERIALS', '')))),
 
+    /*
+    | device_branches – which branch each device stands at, as "SERIAL:branch_id" pairs,
+    |                   e.g. "ABC123:1,XYZ789:2". A punch on a device counts as work at
+    |                   its branch, so people can work at a different branch each day.
+    |                   Devices not listed fall back to the person's home branch.
+    */
+    'device_branches' => collect(explode(',', (string) env('ATTENDANCE_DEVICE_BRANCHES', '')))
+        ->map(fn ($pair) => array_map('trim', explode(':', $pair, 2)))
+        ->filter(fn ($pair) => count($pair) === 2 && $pair[0] !== '' && ctype_digit($pair[1]))
+        ->mapWithKeys(fn ($pair) => [$pair[0] => (int) $pair[1]])
+        ->all(),
+
 ];

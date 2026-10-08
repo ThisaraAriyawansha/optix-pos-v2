@@ -168,6 +168,52 @@ class AttendanceTest extends TestCase
             ->assertNotFound()->assertJson(['result' => 'unknown']);
     }
 
+    public function test_worker_can_work_at_a_different_branch_each_day(): void
+    {
+        $branchB = Branch::create(['name' => 'Quarry 2', 'address' => 'Hill', 'main_contact' => '0771111111']);
+
+        // Monday: Sunil works at his home branch.
+        $this->actingAs($this->cashier)->post(route('attendance.checkIn'), ['type' => 'worker', 'id' => $this->worker->id, 'branch_id' => $this->branch->id]);
+        Carbon::setTestNow('2026-10-07 17:00:00');
+        $this->post(route('attendance.checkOut', Attendance::sole()), ['attendance' => 'present']);
+
+        // Tuesday: Quarry 2's sheet offers him as a visitor, and he checks in there.
+        Carbon::setTestNow('2026-10-08 07:30:00');
+        $this->get(route('attendance', ['branch_id' => $branchB->id]))
+            ->assertOk()->assertSee('Working here today from another branch?')->assertSee('worker:'.$this->worker->id);
+
+        $this->post(route('attendance.checkIn'), ['type' => 'worker', 'id' => $this->worker->id, 'branch_id' => $branchB->id])
+            ->assertSessionHas('success');
+        $tuesday = Attendance::latest('id')->first();
+        $this->assertSame($branchB->id, (int) $tuesday->branch_id);
+
+        // He is now on Quarry 2's sheet, marked as working there today.
+        $this->get(route('attendance', ['branch_id' => $branchB->id]))->assertSee('Sunil')->assertSee('Today at Quarry 2');
+
+        Carbon::setTestNow('2026-10-08 17:00:00');
+        $this->post(route('attendance.checkOut', $tuesday), ['attendance' => 'present']);
+
+        $days = WorkEntry::orderBy('work_date')->pluck('branch_id')->map(fn ($id) => (int) $id)->all();
+        $this->assertSame([$this->branch->id, $branchB->id], $days);
+
+        // His home branch's sheet shows where he was on Tuesday.
+        $this->get(route('labour.work', ['date' => '2026-10-08', 'branch_id' => $this->branch->id]))
+            ->assertOk()->assertSee('Worked at Quarry 2');
+    }
+
+    public function test_fingerprint_device_records_its_own_branch(): void
+    {
+        $branchB = Branch::create(['name' => 'Quarry 2', 'address' => 'Hill', 'main_contact' => '0771111111']);
+        config(['attendance.device_token' => 'secret', 'attendance.device_branches' => ['GATE2' => $branchB->id]]);
+        $pin = (string) (int) substr($this->worker->code, 4);
+
+        $this->withHeader('X-Device-Token', 'secret')
+            ->postJson(route('attendance.device.punch'), ['pin' => $pin, 'punched_at' => '2026-10-07 07:01:00', 'device_sn' => 'GATE2'])
+            ->assertOk();
+
+        $this->assertSame($branchB->id, (int) Attendance::sole()->branch_id);
+    }
+
     public function test_zkteco_device_push(): void
     {
         $pin = (string) (int) substr($this->worker->code, 4);

@@ -200,6 +200,46 @@ class QuarryProductionAndSalaryTest extends TestCase
         $this->assertEquals(2, WorkEntry::whereNull('salary_payment_id')->count());
     }
 
+    public function test_epf_and_etf_are_calculated_only_for_covered_workers_at_their_own_rates(): void
+    {
+        $this->actingAs($this->admin)->post(route('labour.workers.store'), [
+            'name' => 'Kamal', 'branch_id' => $this->branch->id, 'pay_type' => 'monthly', 'monthly_salary' => 50000,
+            'epf_enabled' => 1, 'epf_number' => 'E-123', 'epf_employee_rate' => 8, 'epf_employer_rate' => 15, 'etf_rate' => 3,
+        ])->assertRedirect(route('labour.workers'));
+        $covered = Worker::where('name', 'Kamal')->firstOrFail();
+        $this->assertTrue($covered->epf_enabled);
+
+        $uncovered = Worker::create(['name' => 'Saman', 'branch_id' => $this->branch->id, 'pay_type' => 'monthly', 'monthly_salary' => 40000]);
+
+        $pay = fn (Worker $worker, float $basic) => $this->post(route('labour.salary.store'), [
+            'worker_id' => $worker->id,
+            'period_from' => today()->startOfMonth()->toDateString(),
+            'period_to' => today()->toDateString(),
+            'basic_salary' => $basic,
+            'bonus' => 5000,
+            'payment_method' => 'cash',
+            'paid_on' => today()->toDateString(),
+        ])->assertRedirect();
+
+        // Bonus is left out of EPF: 8% of 50,000 comes off pay; employer pays 15% + 3% on top.
+        $pay($covered, 50000);
+        $payment = SalaryPayment::where('worker_id', $covered->id)->firstOrFail();
+        $this->assertEquals(50000, $payment->epf_base);
+        $this->assertEquals(4000, $payment->epf_employee);
+        $this->assertEquals(7500, $payment->epf_employer);
+        $this->assertEquals(1500, $payment->etf);
+        $this->assertEquals(51000, $payment->net_amount);
+
+        $pay($uncovered, 40000);
+        $payment = SalaryPayment::where('worker_id', $uncovered->id)->firstOrFail();
+        $this->assertEquals(0, $payment->epf_employee + $payment->epf_employer + $payment->etf);
+        $this->assertEquals(45000, $payment->net_amount);
+
+        $stats = $this->get(route('labour.salary'))->assertOk()->viewData('stats');
+        $this->assertEquals(11500, $stats['epf_month']);
+        $this->assertEquals(1500, $stats['etf_month']);
+    }
+
     public function test_demo_seeder_builds_a_working_quarry_and_can_run_twice(): void
     {
         $this->seed(QuarryDemoSeeder::class);
@@ -229,11 +269,18 @@ class QuarryProductionAndSalaryTest extends TestCase
         $this->actingAs($this->cashier)->get(route('help'))
             ->assertOk()
             ->assertSee('Every evening: enter the day')
+            ->assertSee('Full example: one week with the system')
+            // Worked example: 6 days × Rs. 700, + 200 bonus, − 1,000 advance, − 8% EPF on the 4,200 only.
+            ->assertSee('Rs. 4,200.00')
+            ->assertSee('Rs. 3,064.00')
+            ->assertSee('EPF Rs. 840.00', false)
             ->assertDontSee('Admin: first-time setup');
 
         $this->actingAs($this->admin)->withSession(['locale' => 'si'])->get(route('help'))
             ->assertOk()
             ->assertSee('පද්ධතිය භාවිතා කරන ආකාරය')
+            ->assertSee('සම්පූර්ණ උදාහරණය: පද්ධතිය සමඟ එක් සතියක්')
+            ->assertSee('මෙහෙම වුණොත්…?')
             ->assertSee('පරිපාලක: පළමු වරට සැකසීම');
     }
 

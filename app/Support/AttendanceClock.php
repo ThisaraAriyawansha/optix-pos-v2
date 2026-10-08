@@ -18,12 +18,16 @@ use Illuminate\Support\Facades\DB;
  */
 class AttendanceClock
 {
-    public function checkIn(Worker|User $person, ?Carbon $at = null, string $method = 'manual', ?User $by = null, ?string $deviceSn = null): Attendance
+    /**
+     * Open a shift at the branch the person is working at today: the one given (the
+     * sheet it was marked on), else the fingerprint device's branch, else their home branch.
+     */
+    public function checkIn(Worker|User $person, ?Carbon $at = null, string $method = 'manual', ?User $by = null, ?string $deviceSn = null, ?int $branchId = null): Attendance
     {
         $at ??= now();
 
         return $person->attendances()->create([
-            'branch_id' => $person->branch_id,
+            'branch_id' => $branchId ?? config('attendance.device_branches')[$deviceSn] ?? $person->branch_id,
             'work_date' => $at->toDateString(),
             'check_in_at' => $at,
             'check_in_method' => $method,
@@ -224,9 +228,9 @@ class AttendanceClock
         return $person instanceof Worker ? $person->code : $person->employee_code;
     }
 
-    /** "Labourer" or the staff member's role name. */
+    /** "Worker" or the staff member's role name. */
     public static function roleOf(Worker|User $person): string
     {
-        return $person instanceof Worker ? __('Labourer') : ($person->role?->name ? __($person->role->name) : __('Staff'));
+        return $person instanceof Worker ? __('Worker') : ($person->role?->name ? __($person->role->name) : __('Staff'));
     }
 }

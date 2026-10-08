@@ -22,7 +22,7 @@
             <input type="date" name="to" value="{{ $to->toDateString() }}" max="{{ today()->toDateString() }}" class="{{ $filterField }}">
             <select name="type" class="{{ $filterField }}">
                 <option value="">{{ __('Everyone') }}</option>
-                <option value="worker" @selected($type === 'worker')>{{ __('Labourers') }}</option>
+                <option value="worker" @selected($type === 'worker')>{{ __('Workers') }}</option>
                 <option value="user" @selected($type === 'user')>{{ __('Staff') }}</option>
             </select>
             <select name="branch_id" class="{{ $filterField }}">

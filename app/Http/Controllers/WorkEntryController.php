@@ -40,6 +40,13 @@ class WorkEntryController extends Controller
             ->orderBy('name')
             ->get();
 
+        // This branch's workers who worked at another branch that day.
+        $elsewhere = $branchId
+            ? WorkEntry::with('branch')->whereDate('work_date', $date)
+                ->whereIn('worker_id', $workers->pluck('id')->diff($entries->keys()))
+                ->get()->keyBy('worker_id')
+            : collect();
+
         $summary = [
             'present' => $entries->whereIn('attendance', ['present', 'half_day'])->count(),
             'recorded' => $entries->count(),
@@ -56,7 +63,7 @@ class WorkEntryController extends Controller
             ->sortBy(fn ($row) => $row['product']->name)
             ->values();
 
-        return view('frontend.labour.work.main.index', compact('date', 'branchId', 'branches', 'workers', 'entries', 'summary', 'productTotals'));
+        return view('frontend.labour.work.main.index', compact('date', 'branchId', 'branches', 'workers', 'entries', 'elsewhere', 'summary', 'productTotals'));
     }
 
     public function create(Request $request)
@@ -71,6 +78,8 @@ class WorkEntryController extends Controller
         return view('frontend.labour.work.add.index', $this->formData() + [
             'date' => $date,
             'selectedWorker' => $workerId,
+            // The day sheet the worker was entered from: where they worked that day.
+            'selectedBranch' => $request->query('branch_id'),
         ]);
     }
 
@@ -95,7 +104,7 @@ class WorkEntryController extends Controller
         $message = __('Work saved for :name — :amount earned.', ['name' => $entry->worker->name, 'amount' => Money::format($entry->total_earnings)]);
 
         if ($request->input('action') === 'add_another') {
-            return redirect()->route('labour.work.create', ['date' => $entry->work_date->toDateString()])->with('success', $message);
+            return redirect()->route('labour.work.create', ['date' => $entry->work_date->toDateString(), 'branch_id' => $entry->branch_id])->with('success', $message);
         }
 
         return redirect()->route('labour.work', ['date' => $entry->work_date->toDateString(), 'branch_id' => $entry->branch_id])->with('success', $message);

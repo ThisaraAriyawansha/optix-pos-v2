@@ -60,7 +60,10 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-[#24446a]">
                         @forelse ($workers as $worker)
-                            @php $entry = $entries->get($worker->id); @endphp
+                            @php
+                                $entry = $entries->get($worker->id);
+                                $away = $entry ? null : $elsewhere->get($worker->id);
+                            @endphp
                             <tr class="hover:bg-surface-alt transition-colors">
                                 <td class="px-4 py-3 whitespace-nowrap">
                                     <p class="font-medium text-gray-900 dark:text-white">{{ $worker->name }}</p>
@@ -74,6 +77,10 @@
                                                 'half_day' => 'bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300',
                                                 default => 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400',
                                             } }}">{{ $entry->attendanceLabel() }}</span>
+                                    @elseif ($away)
+                                        <span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#2f6fb8]/10 text-[#2f6fb8] dark:bg-[#4a8ad4]/15 dark:text-[#8bb8ea]">
+                                            {{ __('Worked at :branch', ['branch' => $away->branch?->name]) }}
+                                        </span>
                                     @else
                                         <span class="text-[11px] text-gray-400">{{ __('Not entered') }}</span>
                                     @endif
@@ -103,8 +110,11 @@
                                     @if ($entry)
                                         <a href="{{ route('labour.work.edit', $entry) }}"
                                            class="inline-flex px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-alt border border-subtle text-gray-700 dark:text-gray-200">{{ $entry->isPaid() ? __('View') : __('Edit') }}</a>
+                                    @elseif ($away)
+                                        <a href="{{ route('labour.work', ['date' => $date, 'branch_id' => $away->branch_id]) }}"
+                                           class="inline-flex px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-alt border border-subtle text-gray-700 dark:text-gray-200">{{ __('View') }}</a>
                                     @else
-                                        <a href="{{ route('labour.work.create', ['worker' => $worker->id, 'date' => $date]) }}"
+                                        <a href="{{ route('labour.work.create', array_filter(['worker' => $worker->id, 'date' => $date, 'branch_id' => $branchId])) }}"
                                            class="inline-flex px-3 py-1.5 rounded-lg text-xs font-medium bg-brand text-white">{{ __('Enter') }}</a>
                                     @endif
                                 </td>

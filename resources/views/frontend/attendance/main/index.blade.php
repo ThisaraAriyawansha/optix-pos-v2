@@ -28,7 +28,7 @@
             <div class="rounded-2xl bg-brand text-white p-4 shadow-sm">
                 <p class="text-xs text-white/70 font-sans">{{ __('Working Now') }}</p>
                 <p class="font-heading font-semibold text-2xl mt-1">{{ $summary['in'] }}</p>
-                <p class="text-[11px] text-white/70 font-sans mt-1">{{ __(':count labourers', ['count' => $summary['labourers_in']]) }}</p>
+                <p class="text-[11px] text-white/70 font-sans mt-1">{{ __(':count workers', ['count' => $summary['labourers_in']]) }}</p>
             </div>
             <div class="rounded-2xl bg-surface border border-subtle p-4 shadow-sm">
                 <p class="text-xs text-gray-400 dark:text-gray-500 font-sans">{{ __('Not In Yet') }}</p>
@@ -43,7 +43,7 @@
         {{-- ── filters ── --}}
         <form action="{{ route('attendance') }}" method="GET" class="flex flex-wrap items-center gap-2 mt-4 mb-4">
             <div class="flex rounded-xl border border-gray-300 dark:border-[#2a4a70] overflow-hidden text-sm font-medium">
-                @foreach (['' => __('Everyone'), 'worker' => __('Labourers'), 'user' => __('Staff')] as $value => $tabLabel)
+                @foreach (['' => __('Everyone'), 'worker' => __('Workers'), 'user' => __('Staff')] as $value => $tabLabel)
                     <a href="{{ route('attendance', array_filter(['type' => $value, 'branch_id' => $branchId])) }}"
                        class="px-3.5 py-2.5 {{ (string) $type === (string) $value ? 'bg-brand text-white' : 'bg-surface text-gray-600 dark:text-gray-300' }}">{{ $tabLabel }}</a>
                 @endforeach
@@ -58,6 +58,32 @@
             <input type="search" id="person-search" placeholder="{{ __('Search name or ID') }}" oninput="filterPeople(this.value)"
                    class="{{ $filterField }} flex-1 min-w-[10rem]">
         </form>
+
+        {{-- ── someone from another branch working here today ── --}}
+        @if ($branchId && $otherPeople->isNotEmpty())
+            <form action="{{ route('attendance.checkIn') }}" method="POST"
+                  class="flex flex-wrap items-center gap-2 mb-4 p-3 rounded-2xl bg-surface border border-dashed border-gray-300 dark:border-[#2a4a70]">
+                @csrf
+                <input type="hidden" name="branch_id" value="{{ $branchId }}">
+                <input type="hidden" name="type" id="visitor-type">
+                <input type="hidden" name="id" id="visitor-id">
+                <p class="text-xs text-gray-500 dark:text-gray-400 font-sans w-full sm:w-auto">
+                    {{ __('Working here today from another branch?') }}
+                </p>
+                <select required onchange="const [t, i] = this.value.split(':'); document.getElementById('visitor-type').value = t; document.getElementById('visitor-id').value = i;"
+                        class="{{ $filterField }} flex-1 min-w-[12rem]">
+                    <option value="" selected disabled>{{ __('Select a person') }}</option>
+                    @foreach ($otherPeople as $other)
+                        <option value="{{ AttendanceClock::typeOf($other) }}:{{ $other->id }}">
+                            {{ $other->name }} · {{ AttendanceClock::codeOf($other) }}{{ $branchNames->get($other->branch_id) ? ' · '.$branchNames->get($other->branch_id) : '' }}
+                        </option>
+                    @endforeach
+                </select>
+                <button class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-green-600 text-white active:scale-95 transition-transform">
+                    {{ __('Check In Here') }}
+                </button>
+            </form>
+        @endif
 
         {{-- ── people ── --}}
         @if ($rows->isEmpty())
@@ -84,6 +110,11 @@
                             <div class="min-w-0 flex-1">
                                 <p class="font-medium text-gray-900 dark:text-white truncate">{{ $person->name }}</p>
                                 <p class="text-[11px] text-gray-400 dark:text-gray-500 truncate">{{ $code }} · {{ AttendanceClock::roleOf($person) }}</p>
+                                @if ($row['workedAt'])
+                                    <p class="text-[11px] text-[#2f6fb8] dark:text-[#8bb8ea] truncate">
+                                        {{ __('Today at :branch', ['branch' => $row['workedAt']]) }}{{ $row['home'] ? ' · '.__('from :branch', ['branch' => $row['home']]) : '' }}
+                                    </p>
+                                @endif
                             </div>
                             <span class="shrink-0 px-2 py-0.5 rounded-full text-[11px] font-medium
                                 {{ match ($row['status']) {
@@ -115,7 +146,7 @@
                                     @if ($entry && $entry->items->isNotEmpty())
                                         <p>{{ __('Work saved') }} · {{ $entry->attendanceLabel() }}</p>
                                     @else
-                                        <a href="{{ route('labour.work.create', ['worker' => $person->id, 'date' => today()->toDateString()]) }}" class="text-brand underline">{{ __('Add work done') }}</a>
+                                        <a href="{{ route('labour.work.create', array_filter(['worker' => $person->id, 'date' => today()->toDateString(), 'branch_id' => $last->branch_id])) }}" class="text-brand underline">{{ __('Add work done') }}</a>
                                     @endif
                                 @endif
                             @else
@@ -141,6 +172,9 @@
                                     @csrf
                                     <input type="hidden" name="type" value="{{ $row['type'] }}">
                                     <input type="hidden" name="id" value="{{ $person->id }}">
+                                    @if ($branchId)
+                                        <input type="hidden" name="branch_id" value="{{ $branchId }}">
+                                    @endif
                                     <button class="w-full py-2.5 rounded-xl text-sm font-semibold active:scale-95 transition-transform
                                                    {{ $row['status'] === 'absent' ? 'bg-green-600 text-white' : 'border border-gray-300 dark:border-[#2a4a70] text-gray-700 dark:text-gray-200' }}">
                                         {{ $row['status'] === 'absent' ? __('Check In') : __('Check In Again') }}

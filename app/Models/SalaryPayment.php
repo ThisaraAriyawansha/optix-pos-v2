@@ -19,6 +19,10 @@ class SalaryPayment extends Model
         'basic_salary',
         'bonus',
         'deductions',
+        'epf_base',
+        'epf_employee',
+        'epf_employer',
+        'etf',
         'net_amount',
         'payment_method',
         'paid_on',
@@ -33,6 +37,10 @@ class SalaryPayment extends Model
         'basic_salary' => 'decimal:2',
         'bonus' => 'decimal:2',
         'deductions' => 'decimal:2',
+        'epf_base' => 'decimal:2',
+        'epf_employee' => 'decimal:2',
+        'epf_employer' => 'decimal:2',
+        'etf' => 'decimal:2',
         'net_amount' => 'decimal:2',
     ];
 

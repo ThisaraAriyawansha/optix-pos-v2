@@ -34,7 +34,7 @@
         @if ($workers->isEmpty())
             <div class="flex flex-col items-center justify-center text-center py-20 rounded-2xl bg-surface border border-subtle">
                 <p class="font-heading font-semibold text-gray-900 dark:text-white text-sm">{{ __('No workers found') }}</p>
-                <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">{{ __('Add labourers and staff who are paid wages or salary.') }}</p>
+                <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">{{ __('Add workers and staff who are paid wages or salary.') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

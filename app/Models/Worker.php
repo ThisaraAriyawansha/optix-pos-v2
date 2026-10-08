@@ -27,6 +27,11 @@ class Worker extends Model
         'pay_type',
         'daily_rate',
         'monthly_salary',
+        'epf_enabled',
+        'epf_number',
+        'epf_employee_rate',
+        'epf_employer_rate',
+        'etf_rate',
         'joined_on',
         'notes',
         'is_active',
@@ -36,6 +41,10 @@ class Worker extends Model
     protected $casts = [
         'daily_rate' => 'decimal:2',
         'monthly_salary' => 'decimal:2',
+        'epf_enabled' => 'boolean',
+        'epf_employee_rate' => 'decimal:2',
+        'epf_employer_rate' => 'decimal:2',
+        'etf_rate' => 'decimal:2',
         'joined_on' => 'date',
         'is_active' => 'boolean',
         'track_attendance' => 'boolean',
@@ -77,6 +86,24 @@ class Worker extends Model
     public function payTypeLabel(): string
     {
         return __(self::PAY_TYPES[$this->pay_type] ?? 'Per work done');
+    }
+
+    /**
+     * EPF / ETF on the given earnings. The employee's EPF share comes off their pay;
+     * the employer's EPF and ETF are paid on top by the business. All zero when not covered.
+     *
+     * @return array{epf_base: float, epf_employee: float, epf_employer: float, etf: float}
+     */
+    public function contributionsFor(float $earnings): array
+    {
+        $base = $this->epf_enabled ? round(max($earnings, 0), 2) : 0.0;
+
+        return [
+            'epf_base' => $base,
+            'epf_employee' => round($base * (float) $this->epf_employee_rate / 100, 2),
+            'epf_employer' => round($base * (float) $this->epf_employer_rate / 100, 2),
+            'etf' => round($base * (float) $this->etf_rate / 100, 2),
+        ];
     }
 
     /**

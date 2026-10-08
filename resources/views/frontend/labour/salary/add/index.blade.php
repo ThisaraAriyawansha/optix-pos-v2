@@ -113,6 +113,21 @@
                         </div>
                     @endforeach
 
+                    @if ($worker->epf_enabled)
+                        <div class="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                            <div class="flex justify-between">
+                                <span>{{ __('EPF – employee (:rate%)', ['rate' => (float) $worker->epf_employee_rate]) }}</span>
+                                <span class="font-medium text-gray-900 dark:text-white">− <span id="epf-employee"></span></span>
+                            </div>
+                            <p class="text-[11px] text-gray-400 dark:text-gray-500">
+                                {{ __('Paid by business') }}: {{ __('EPF :rate%', ['rate' => (float) $worker->epf_employer_rate]) }} <span id="epf-employer"></span>
+                                · {{ __('ETF :rate%', ['rate' => (float) $worker->etf_rate]) }} <span id="etf"></span>
+                            </p>
+                        </div>
+                    @else
+                        <p class="text-[11px] text-gray-400 dark:text-gray-500">{{ __('No EPF / ETF for this worker.') }}</p>
+                    @endif
+
                     <div class="rounded-xl px-4 py-3 bg-brand text-white">
                         <p class="text-xs text-white/70">{{ __('Net pay') }}</p>
                         <p class="font-heading font-semibold text-2xl" id="net-pay">{{ Money::format($workEarnings + $defaultBasic) }}</p>
@@ -144,8 +159,19 @@
             <script>
                 function recalcNet() {
                     const val = (id) => parseFloat(document.getElementById(id).value) || 0;
-                    const net = {{ $workEarnings }} + val('basic_salary') + val('bonus') - val('deductions');
-                    document.getElementById('net-pay').textContent = 'Rs. ' + net.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    const money = (amount) => 'Rs. ' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    const pct = (rate) => Math.round(epfBase * rate) / 100;
+                    // Same rule as the server: EPF / ETF on work earnings + basic, not bonus.
+                    const epfBase = @json($worker->epf_enabled) ? Math.max({{ $workEarnings }} + val('basic_salary'), 0) : 0;
+                    const epfEmployee = pct({{ (float) $worker->epf_employee_rate }});
+                    const net = {{ $workEarnings }} + val('basic_salary') + val('bonus') - val('deductions') - epfEmployee;
+                    document.getElementById('net-pay').textContent = money(net);
+
+                    if (@json($worker->epf_enabled)) {
+                        document.getElementById('epf-employee').textContent = money(epfEmployee);
+                        document.getElementById('epf-employer').textContent = money(pct({{ (float) $worker->epf_employer_rate }}));
+                        document.getElementById('etf').textContent = money(pct({{ (float) $worker->etf_rate }}));
+                    }
                 }
                 recalcNet();
             </script>

@@ -58,7 +58,7 @@
         {{-- ── headline numbers ── --}}
         <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             <div class="col-span-2 lg:col-span-1 rounded-2xl bg-brand text-white p-4 sm:p-5 shadow-sm">
-                <p class="text-xs text-white/70 font-sans">{{ $isToday ? __('Labourers Working Now') : __('Labourers Came') }}</p>
+                <p class="text-xs text-white/70 font-sans">{{ $isToday ? __('Workers Working Now') : __('Workers Came') }}</p>
                 <p class="font-heading font-semibold text-3xl tracking-tight mt-1">
                     {{ $isToday ? $summary['labourers_in'] : $withShifts->where('type', 'worker')->count() }}<span class="text-lg text-white/60"> / {{ $summary['labourers'] }}</span>
                 </p>
@@ -95,7 +95,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <h2 class="font-heading font-semibold text-gray-900 dark:text-white text-base tracking-tight">{{ __('People on Site by Hour') }}</h2>
                     <div class="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-300">
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm {{ $workerBar }}"></span>{{ __('Labourers') }}</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm {{ $workerBar }}"></span>{{ __('Workers') }}</span>
                         <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm {{ $staffBar }}"></span>{{ __('Staff') }}</span>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         @foreach ($hours as $hour)
                             @php $total = $hour['workers'] + $hour['staff']; @endphp
                             <div class="hour-bar group relative flex-1 h-full flex flex-col justify-end items-stretch cursor-default"
-                                 data-tip="{{ $hour['label'] }} — {{ __('Labourers') }}: {{ $hour['workers'] }} · {{ __('Staff') }}: {{ $hour['staff'] }}">
+                                 data-tip="{{ $hour['label'] }} — {{ __('Workers') }}: {{ $hour['workers'] }} · {{ __('Staff') }}: {{ $hour['staff'] }}">
                                 <div class="absolute inset-0 rounded-md group-hover:bg-gray-100 dark:group-hover:bg-white/5"></div>
                                 @if ($total > 0)
                                     @if ($total === $peak)

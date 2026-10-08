@@ -4,7 +4,7 @@
     @include('frontend.componenet.pagehero', [
         'title' => __('Workers'),
         'crumbs' => [__('Workers') => null],
-        'subtitle' => __('Register labourers and keep their details'),
+        'subtitle' => __('Register workers and keep their details'),
         'actions' => [
             ['url' => route('help'), 'label' => __('Help'), 'icon' => \App\Support\Help::ICON],
         ],
@@ -17,7 +17,7 @@
             @include('frontend.componenet.hubtile', [
                 'url' => route('labour.workers.create'),
                 'label' => __('Register New Worker'),
-                'hint' => __('Add a new labourer'),
+                'hint' => __('Add a new worker'),
                 'icon' => 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z',
                 'primary' => true,
             ])

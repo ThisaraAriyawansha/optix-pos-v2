@@ -4,7 +4,7 @@
     @include('frontend.componenet.pagehero', [
         'title' => __('Add Worker'),
         'crumbs' => [__('Workers') => route('labour'), __('All Workers') => route('labour.workers'), __('Add') => null],
-        'subtitle' => __('Labourers do not log in — their work is entered by staff'),
+        'subtitle' => __('Workers do not log in — their work is entered by staff'),
     ])
 
     <main class="px-5 pt-5 pb-28 max-w-3xl mx-auto">

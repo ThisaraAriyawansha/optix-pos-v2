@@ -29,22 +29,44 @@ class AttendanceController extends Controller
         $type = in_array($request->query('type'), ['worker', 'user'], true) ? $request->query('type') : null;
         $branches = Branch::orderBy('name')->get();
 
-        $people = $this->clock->trackedPeople($branchId, $type);
-        $shifts = Attendance::whereDate('work_date', today())
+        $branchNames = $branches->pluck('name', 'id');
+        $key = fn ($person) => AttendanceClock::typeOf($person).':'.$person->id;
+
+        $todayShifts = Attendance::with('attendable')->whereDate('work_date', today())
             ->orderBy('check_in_at')
             ->get()
-            ->groupBy(fn (Attendance $shift) => $shift->attendable_type.':'.$shift->attendable_id);
+            ->filter(fn (Attendance $shift) => $shift->attendable);
+        $shifts = $todayShifts->groupBy(fn (Attendance $shift) => $shift->attendable_type.':'.$shift->attendable_id);
+
+        // The branch's own people, plus anyone from another branch working here today.
+        $people = $this->clock->trackedPeople($branchId, $type);
+        if ($branchId) {
+            $visitors = $todayShifts->where('branch_id', $branchId)
+                ->when($type, fn ($shifts) => $shifts->where('attendable_type', $type))
+                ->pluck('attendable');
+            $people = $people->concat($visitors)->unique($key)->values();
+        }
+
+        // People from other branches who can be checked in here for the day.
+        $onSheet = $people->map($key)->flip();
+        $otherPeople = $branchId
+            ? $this->clock->trackedPeople(null, $type)->reject(fn ($person) => $onSheet->has($key($person)))->values()
+            : collect();
 
         $workEntries = WorkEntry::with('items')->whereDate('work_date', today())
             ->whereIn('worker_id', $people->whereInstanceOf(Worker::class)->pluck('id'))
             ->get()->keyBy('worker_id');
 
-        $rows = $people->map(function ($person) use ($shifts, $workEntries) {
+        $rows = $people->map(function ($person) use ($shifts, $workEntries, $branchNames) {
             $type = AttendanceClock::typeOf($person);
             $personShifts = $shifts->get($type.':'.$person->id, collect());
             $open = $personShifts->first(fn (Attendance $shift) => $shift->isOpen());
+            $workedAt = ($open ?? $personShifts->last())?->branch_id;
 
             return [
+                // Set when today's work is at a branch other than their home one.
+                'workedAt' => $workedAt && (int) $workedAt !== (int) $person->branch_id ? $branchNames->get($workedAt) : null,
+                'home' => $branchNames->get($person->branch_id),
                 'person' => $person,
                 'type' => $type,
                 'shifts' => $personShifts,
@@ -65,7 +87,7 @@ class AttendanceController extends Controller
         // Working first, then not yet in, then gone home.
         $rows = $rows->sortBy(fn ($row) => [['in' => 0, 'absent' => 1, 'out' => 2][$row['status']], $row['person']->name])->values();
 
-        return view('frontend.attendance.main.index', compact('rows', 'summary', 'branches', 'branchId', 'type'));
+        return view('frontend.attendance.main.index', compact('rows', 'summary', 'branches', 'branchId', 'type', 'otherPeople', 'branchNames'));
     }
 
     public function checkIn(Request $request)
@@ -73,6 +95,8 @@ class AttendanceController extends Controller
         $validated = $request->validate([
             'type' => ['required', Rule::in(['worker', 'user'])],
             'id' => ['required', 'integer'],
+            // The branch they are working at today; their home branch when not given.
+            'branch_id' => ['nullable', 'integer', 'exists:branches,id'],
         ]);
 
         $person = $this->trackedPerson($validated['type'], $validated['id']);
@@ -81,9 +105,14 @@ class AttendanceController extends Controller
             return back()->with('error', __(':name is already checked in.', ['name' => $person->name]));
         }
 
-        $shift = $this->clock->checkIn($person, now(), 'manual', $request->user());
+        $branchId = isset($validated['branch_id']) ? (int) $validated['branch_id'] : null;
+        $shift = $this->clock->checkIn($person, now(), 'manual', $request->user(), null, $branchId);
 
-        return back()->with('success', __(':name checked in at :time.', ['name' => $person->name, 'time' => $shift->check_in_at->format('h:i A')]));
+        $message = $shift->branch_id && (int) $shift->branch_id !== (int) $person->branch_id
+            ? __(':name checked in at :time at :branch.', ['name' => $person->name, 'time' => $shift->check_in_at->format('h:i A'), 'branch' => $shift->branch?->name])
+            : __(':name checked in at :time.', ['name' => $person->name, 'time' => $shift->check_in_at->format('h:i A')]);
+
+        return back()->with('success', $message);
     }
 
     /**

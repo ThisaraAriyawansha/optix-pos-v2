@@ -6,7 +6,7 @@
     <input type="text" name="employee_code" id="employee_code" value="{{ $value }}" maxlength="20"
            class="w-full px-4 py-2.5 rounded-xl bg-surface border border-gray-300 dark:border-[#2a4a70] text-sm font-sans uppercase text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand">
     <p class="text-xs text-gray-400 dark:text-gray-500 font-sans mt-1">
-        {{ __('Shared with labourers. Leave as is to use the next free ID.') }}
+        {{ __('Shared with workers. Leave as is to use the next free ID.') }}
     </p>
     @error('employee_code')
         <p class="text-xs text-accent mt-1">{{ $message }}</p>

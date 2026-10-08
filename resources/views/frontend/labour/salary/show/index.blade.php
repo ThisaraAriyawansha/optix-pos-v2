@@ -70,8 +70,21 @@
                 @if ((float) $payment->deductions > 0)
                     <div class="flex justify-between text-gray-600 dark:text-gray-300"><dt>{{ __('Deductions') }}</dt><dd>− {{ Money::format($payment->deductions) }}</dd></div>
                 @endif
+                @if ((float) $payment->epf_employee > 0)
+                    <div class="flex justify-between text-gray-600 dark:text-gray-300"><dt>{{ __('EPF – employee') }}</dt><dd>− {{ Money::format($payment->epf_employee) }}</dd></div>
+                @endif
                 <div class="flex justify-between pt-2 border-t border-gray-300 dark:border-[#2a4a70] font-heading font-semibold text-lg text-gray-900 dark:text-white"><dt>{{ __('Net Paid') }}</dt><dd>{{ Money::format($payment->net_amount) }}</dd></div>
             </dl>
+
+            @if ((float) $payment->epf_base > 0)
+                <dl class="ml-auto max-w-xs space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                    <p class="font-medium text-gray-700 dark:text-gray-200">{{ __('EPF / ETF') }}@if ($payment->worker->epf_number) · {{ __('EPF No.') }} {{ $payment->worker->epf_number }}@endif</p>
+                    <div class="flex justify-between"><dt>{{ __('Earnings for EPF') }}</dt><dd>{{ Money::format($payment->epf_base) }}</dd></div>
+                    <div class="flex justify-between"><dt>{{ __('EPF – employee') }}</dt><dd>{{ Money::format($payment->epf_employee) }}</dd></div>
+                    <div class="flex justify-between"><dt>{{ __('EPF – employer') }}</dt><dd>{{ Money::format($payment->epf_employer) }}</dd></div>
+                    <div class="flex justify-between"><dt>{{ __('ETF – employer') }}</dt><dd>{{ Money::format($payment->etf) }}</dd></div>
+                </dl>
+            @endif
 
             @if ($payment->notes)
                 <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('Notes') }}: {{ $payment->notes }}</p>
